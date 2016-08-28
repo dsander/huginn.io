@@ -19,6 +19,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'haml', '~> 4.0.7'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2.0'
+gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.1.2'
 
 # Use jquery as the JavaScript library
@@ -50,6 +51,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "letter_opener", '~> 1.4.1'
+  gem 'dotenv-rails', '~> 2.1.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
