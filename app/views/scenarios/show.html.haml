@@ -1,0 +1,17 @@
+= form_for(@scenario) do |f|
+  .actions
+    .field
+      = f.label :name
+      %br
+      = f.text_field :name, disabled: true
+    .field
+      = f.label :description
+      %br
+      = f.text_area :description, disabled: true
+    .field
+      = f.label :data
+      %br
+      = f.text_area :data, disabled: true
+= link_to 'Edit', edit_scenario_path(@scenario)
+|
+= link_to 'Back', scenarios_path

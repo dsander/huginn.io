@@ -3,18 +3,14 @@ class Scenario < ApplicationRecord
 
   serialize :data, JSON
 
-  validates :name, presence: true
+  validates :name, :data, presence: true
   validate :agents_json_valid?
 
   protected
 
   def agents_json_valid?
-    if self.data == nil
-      errors.add(:data, message: "can't be blank")
-      return false
-    end
     begin
-      JSON.parse(self.data)
+      JSON.parse(self.data) unless self.data.blank?
       return true
     rescue JSON::ParserError
       errors.add(:data, message: "not in JSON format")
