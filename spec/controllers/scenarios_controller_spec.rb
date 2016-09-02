@@ -19,16 +19,18 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe ScenariosController, type: :controller do
+  fixtures :all
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Scenario. As you add validations to Scenario, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { user: users(:bob), name: "test", data: "{\"test\":\"hubs\"}"}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { user: users(:bob), name: "test", data: "{test: fail_json}" }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,9 +40,9 @@ RSpec.describe ScenariosController, type: :controller do
 
   describe "GET #index" do
     it "assigns all scenarios as @scenarios" do
-      scenario = Scenario.create! valid_attributes
+      scenario = [ scenarios(:bob_weather) , Scenario.create!(valid_attributes) ]
       get :index, params: {}, session: valid_session
-      expect(assigns(:scenarios)).to eq([scenario])
+      expect(assigns(:scenarios)).to eq(scenario)
     end
   end
 
@@ -103,14 +105,14 @@ RSpec.describe ScenariosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        scenarios(:bob_weather).attributes
       }
 
       it "updates the requested scenario" do
         scenario = Scenario.create! valid_attributes
         put :update, params: {id: scenario.to_param, scenario: new_attributes}, session: valid_session
         scenario.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:scenario)).to eq(scenario)
       end
 
       it "assigns the requested scenario as @scenario" do
@@ -136,7 +138,7 @@ RSpec.describe ScenariosController, type: :controller do
       it "re-renders the 'edit' template" do
         scenario = Scenario.create! valid_attributes
         put :update, params: {id: scenario.to_param, scenario: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
+        expect(response).to render_template(:edit)
       end
     end
   end

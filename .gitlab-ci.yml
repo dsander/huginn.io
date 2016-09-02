@@ -1,0 +1,9 @@
+specs:
+  script:
+  - bundle install --path=/cache/bundler
+  - bundle exec rake db:drop db:create db:migrate
+  - bundle exec rake
+  tags:
+    - ruby23
+    - postgres
+    - phantomjs

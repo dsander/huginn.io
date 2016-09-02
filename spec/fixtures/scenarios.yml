@@ -5,9 +5,7 @@ jane_weather:
 
 
 bob_weather:
-  name: Bob's weather alert Scenario
+  name: bob's weather Scenario
   user: bob
-  description: Bob's weather alert system
-
-invalid_name:
-  user: bob
+  description: bob's weather system
+  data: '"{\"test\":\"hubs\"}"'

@@ -1,0 +1,8 @@
+development:
+  options: -d virtualbox
+
+test:
+  options: -d virtualbox
+
+production:
+  options: -d virtualbox
