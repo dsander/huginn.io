@@ -1,8 +1,6 @@
 class Scenario < ApplicationRecord
   belongs_to :user
 
-  serialize :data, JSON
-
   validates :name, :data, presence: true
   validate :agents_json_valid?
 

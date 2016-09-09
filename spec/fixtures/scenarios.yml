@@ -8,4 +8,6 @@ bob_weather:
   name: bob's weather Scenario
   user: bob
   description: bob's weather system
-  data: '"{\"test\":\"hubs\"}"'
+  data: <%= {
+                 :url => "http://trailers.apple.com/trailers/home/rss/newtrailers.rss"
+               }.to_json.inspect %>
