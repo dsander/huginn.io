@@ -1,0 +1,14 @@
+bob:
+  email: bob@example.org
+  encrypted_password: <%= User.new.send(:password_digest, 'bobobobobobob') %>
+  confirmed_at: 2015-01-01 00:00:00
+
+jane:
+  email: jane@example.org
+  encrypted_password: <%= User.new.send(:password_digest, 'janejane') %>
+
+
+new_user:
+  email: new@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: 2015-01-01 00:00:00
