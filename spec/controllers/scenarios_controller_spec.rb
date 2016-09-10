@@ -40,9 +40,10 @@ RSpec.describe ScenariosController, type: :controller do
 
   describe "GET #index" do
     it "assigns all scenarios as @scenarios" do
-      scenario = [ scenarios(:bob_weather) , Scenario.create!(valid_attributes) ]
+      scenario = Scenario.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(assigns(:scenarios)).to eq(scenario)
+      expect(assigns(:scenarios)).to include(scenarios(:bob_weather))
+      expect(assigns(:scenarios)).to include(scenario)
     end
   end
 

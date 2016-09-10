@@ -41,6 +41,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5.2'
   gem 'rails-controller-testing'
+  gem 'simplecov', '~> 0.12', require: false
+  gem 'poltergeist', '~> 1.10.0'
+  gem 'database_cleaner', '~> 1.5.3'
 end
 
 group :development do
@@ -49,9 +52,14 @@ group :development do
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "letter_opener", '~> 1.4.1'
   gem 'dotenv-rails', '~> 2.1.1'
+  gem 'guard', '~> 2.14.0'
+  gem 'guard-rspec', '~> 4.4'
+  gem 'guard-livereload', '~> 2.5.2'
+  gem 'rack-livereload', '~> 0.3.16'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
