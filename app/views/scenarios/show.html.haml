@@ -11,7 +11,7 @@
     .field
       = f.label :data
       %br
-      = f.text_area :data, disabled: true
+      = f.text_area :data, value: f.object.data.to_json, disabled: true
 = link_to 'Edit', edit_scenario_path(@scenario)
 |
 = link_to 'Back', scenarios_path
