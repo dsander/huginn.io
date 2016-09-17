@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828200655) do
+ActiveRecord::Schema.define(version: 20160917150623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agents", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "creates_events"
+    t.boolean  "receives_events"
+    t.boolean  "consumes_file_pointer"
+    t.boolean  "emits_file_pointer"
+    t.boolean  "controls_agents"
+    t.boolean  "dry_runs"
+    t.boolean  "form_configurable"
+    t.string   "oauth_service"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "scenarios", force: :cascade do |t|
     t.text     "description"

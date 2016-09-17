@@ -1,3 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.well.description {
+  h1 { font-size: 26px; }
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+}
+
+h3 {
+  .label {
+    font-size: 12px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+  }
+}
