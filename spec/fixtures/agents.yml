@@ -1,0 +1,23 @@
+website_agent:
+  name: "WebsiteAgent"
+  description: "<b>Website Agent</b>"
+  creates_events: true
+  receives_events: true
+  consumes_file_pointer: false
+  emits_file_pointer: false
+  controls_agents: false
+  dry_runs: true
+  form_configurable: true
+  oauth_service: null
+
+hipchat_agent:
+  name: "HipchatAgent"
+  description: "<b>A meaningful description</b>"
+  creates_events: true
+  receives_events: false
+  consumes_file_pointer: false
+  emits_file_pointer: false
+  controls_agents: false
+  dry_runs: false
+  form_configurable: true
+  oauth_service: hipchat

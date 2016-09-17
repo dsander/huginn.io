@@ -1,9 +1,8 @@
 
 .row
   .col-lg-3
-    = bootstrap_form_tag action: 'search', layout: :inline, label_col: 'hidden' do |f|
-      = f.text_field :term, placeholder: 'Find an Agent', skip_label: true
-      = f.submit 'Search'
+    = bootstrap_form_tag url: search_agents_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: 'hidden', enforce_utf8: false do |f|
+      = f.text_field :q, value: params[:q], placeholder: 'Search through Agents', skip_label: true
     %ul.nav.nav-pills.nav-stacked
       - @agents.each do |a|
         %li{role: 'presentation'}

@@ -3,7 +3,9 @@ class AgentsController < ApplicationController
     @agents = Agent.all
   end
 
-  def show
-    @agent = Agent.find(params[:id])
+  def search
+    @agents = Agent.search(params[:q])
+
+    render action: :index
   end
 end
