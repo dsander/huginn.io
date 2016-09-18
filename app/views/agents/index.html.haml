@@ -12,6 +12,10 @@
       %h3{id: agent.name}
         = agent_name agent.name
         = features agent
+        - if agent.agent_gem
+          = link_to agent_gems_path(anchor: agent.agent_gem.name) do
+            %span.label.label-info
+              = agent.agent_gem.name
       .well.description
         != agent.description
       %hr

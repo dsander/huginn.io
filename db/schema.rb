@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918094040) do
+ActiveRecord::Schema.define(version: 20160919210140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "agent_gems", force: :cascade do |t|
+    t.string   "name"
+    t.string   "summary"
+    t.string   "description"
+    t.string   "repository"
+    t.string   "version"
+    t.string   "license"
+    t.integer  "stars"
+    t.integer  "watchers"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "agents", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160918094040) do
     t.string   "oauth_service"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "agent_gem_id"
     t.index "description gin_trgm_ops", name: "agents_description_idx", using: :gin
     t.index "name gin_trgm_ops", name: "agents_name_idx", using: :gin
   end

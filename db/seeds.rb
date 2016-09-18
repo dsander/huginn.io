@@ -3,4 +3,6 @@
 #
 
 require 'agent_importer'
+require 'agent_gem_importer'
+AgentGemImporter.run
 AgentImporter.run

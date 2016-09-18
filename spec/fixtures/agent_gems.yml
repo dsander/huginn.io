@@ -1,0 +1,9 @@
+agent_gem:
+  summary: 'Agents for doing natural language processing using the FREME APIs.'
+  description: 'Write a longer description or delete this line.'
+  license: 'Apache License 2.0'
+  name: 'huginn_freme_enrichment_agents'
+  repository: 'kreuzwerker/DKT.huginn_freme_enrichment_agents'
+  stars: 0
+  version: '0.1'
+  watchers: 0

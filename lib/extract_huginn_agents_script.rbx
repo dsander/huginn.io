@@ -1,4 +1,5 @@
 agents = []
+HuginnAgent.require!
 Agent.descendants.each do |klass|
   instance = klass.new(user_id: 1)
   agents << {

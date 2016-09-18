@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :search
     end
   end
+  resources :agent_gems, only: [:index]
 
   root to: 'welcome#index'
 end

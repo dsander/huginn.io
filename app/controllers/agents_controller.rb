@@ -1,6 +1,6 @@
 class AgentsController < ApplicationController
   def index
-    @agents = Agent.all
+    @agents = Agent.order(name: :ASC).all
   end
 
   def search
