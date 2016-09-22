@@ -1,7 +1,7 @@
 require 'rails_helper'
-require 'agent_gem_importer'
+require 'agent_gem_fetcher'
 
-RSpec.describe AgentGemImporter, type: :model do
+RSpec.describe AgentGemFetcher, type: :model do
 
   it 'parses a gemspec file' do
     # Code search for .gemspec files
@@ -16,17 +16,14 @@ RSpec.describe AgentGemImporter, type: :model do
     stub_request(:get, "https://api.github.com/repositories/67696115").
        with(:headers => {'Accept'=>'application/vnd.github.v3+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Octokit Ruby Gem 4.3.0'}).
        to_return(:status => 200, :body => File.read(File.join(Rails.root, 'spec/data/github_repository_get.json')), :headers => {'Content-Type'=>'application/json'})
-    expect {
-      AgentGemImporter.run
-    }.to change(AgentGem, :count).by(1)
-    gem = AgentGem.first
-    expect(gem.summary).to eq('Agents for doing natural language processing using the FREME APIs.')
-    expect(gem.description).to eq('Write a longer description or delete this line.')
-    expect(gem.license).to eq('Apache License 2.0')
-    expect(gem.name).to eq('huginn_freme_enrichment_agents')
-    expect(gem.repository).to eq('kreuzwerker/DKT.huginn_freme_enrichment_agents')
-    expect(gem.stars).to eq(0)
-    expect(gem.version).to eq('0.1')
-    expect(gem.watchers).to eq(0)
+    data = AgentGemFetcher.run
+    expect(data).to match_array([{name: "huginn_freme_enrichment_agents",
+                                  version: "0.1",
+                                  summary: "Agents for doing natural language processing using the FREME APIs.",
+                                  description: "Write a longer description or delete this line.",
+                                  license: "Apache License 2.0",
+                                  repository: "kreuzwerker/DKT.huginn_freme_enrichment_agents",
+                                  stars: 0,
+                                  watchers: 0}])
   end
 end
