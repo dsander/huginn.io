@@ -21,7 +21,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2.0'
 gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.1.2'
-
+gem 'octokit', '~> 4.3.0'
+gem 'parser', '~> 2.3.1.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'simplecov', '~> 0.12', require: false
   gem 'poltergeist', '~> 1.10.0'
   gem 'database_cleaner', '~> 1.5.3'
+  gem 'webmock', '~> 2.1.0'
 end
 
 group :development do

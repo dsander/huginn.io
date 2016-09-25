@@ -7,7 +7,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{'data-controller' => controller_name, 'data-action' => action_name}
-    %nav.navbar.navbar-material-blue-grey.navbar-fixed.top{role: 'navigation'}
+    %nav.navbar.navbar-default.navbar-fixed.top{role: 'navigation'}
       .container
         .navbar-header
           %button.navbar-toggle.collapsed{data: {toggle: 'collapse', target: '#main-navigation'}}
@@ -20,8 +20,11 @@
             Communin
         .collapse.navbar-collapse#main-navigation
           %ul.nav.navbar-nav
-            =# nav_link 'Instances', instances_path, 'instances'
-            = nav_link "Scenarios", scenarios_path
+            = nav_link "Scenarios", scenarios_path, 'scenarios'
+          %ul.nav.navbar-nav
+            = nav_link "Agent Database", agents_path, 'agents'
+          %ul.nav.navbar-nav
+            = nav_link "Agent Gems", agent_gems_path, 'agent_gems'
           %ul.nav.navbar-nav.navbar-right
             - if current_user
               %li
