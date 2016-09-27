@@ -1,15 +1,30 @@
-%p#notice= notice
-%h1 Scenarios
-%table
-  %thead
-    %tr
-      %th{:colspan => "3"}
-  %tbody
+.row
+  .col-lg-3
+    = bootstrap_form_tag url: search_scenarios_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: 'hidden', enforce_utf8: false do |f|
+      = f.text_field :q, value: params[:q], placeholder: 'Search through Scenarios', skip_label: true
+    %ul.nav.nav-pills.nav-stacked
+      %li{role: 'presentation'}
+        = link_to 'New Scenario', new_scenario_path
+      - @scenarios.each do |a|
+        %li{role: 'presentation'}
+          = link_to agent_name(a.name), "##{a.name}"
+  .col-lg-9
     - @scenarios.each do |scenario|
-      %tr
-        %td= scenario.name
-        %td= link_to 'Show', scenario
-        %td= link_to 'Edit', edit_scenario_path(scenario)
-        %td= link_to 'Destroy', scenario, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Scenario', new_scenario_path
+      %h3{id: scenario.name}
+        = agent_name scenario.name
+        - if scenario.icon.blank?
+          = scenario_label(scenario, icon('gear'))
+        - else
+          = scenario_label(scenario, icon(scenario.icon))
+
+        .btn-group.btn-group-xs{:style => "float: right"}
+          = link_to 'Show', scenario, class: "btn btn-default"
+          = link_to 'Edit', edit_scenario_path(scenario), class: "btn btn-default"
+          = link_to 'Delete', '#', data: { toggle: 'modal', target: "#confirm-scenario-deletion-#{scenario.id}"}, class: "btn btn-default"
+      -#   - if agent.agent_gem
+      -#     = link_to agent_gems_path(anchor: agent.agent_gem.name) do
+      -#       %span.label.label-info
+      -#         = agent.agent_gem.name
+      .well.description
+        != scenario.description
+      %hr

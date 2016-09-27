@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919210140) do
+ActiveRecord::Schema.define(version: 20160925182626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,11 @@ ActiveRecord::Schema.define(version: 20160919210140) do
     t.string   "name"
     t.json     "data"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "tag_bg_color"
+    t.string   "tag_fg_color"
+    t.string   "icon"
     t.index ["user_id"], name: "index_scenarios_on_user_id", using: :btree
   end
 

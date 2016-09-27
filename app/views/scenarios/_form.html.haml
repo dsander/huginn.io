@@ -1,23 +1,54 @@
-= form_for(scenario) do |f|
-  - if scenario.errors.any?
-    #error_explanation
+
+
+= form_for(@scenario, :method => @scenario.new_record? ? "POST" : "PUT") do |f|
+  - if @scenario.errors.any?
+    .row.well
       %h2
-        = pluralize(scenario.errors.count, "error")
-        prohibited this scenario from being saved:
-      %ul
-        - scenario.errors.full_messages.each do |message|
-          %li= message
-  .actions
-    .field
-      = f.label :name
-      %br
-      = f.text_field :name
-    .field
-      = f.label :description
-      %br
-      = f.text_area :description
-    .field
-      = f.label :data
-      %br
-      = f.text_area :data, value: f.object.data.is_a?(String) ? f.object.data : f.object.data.to_json
-    = f.submit
+        = pluralize(@scenario.errors.count, "error")
+        prohibited this Scenario from being saved:
+      - @scenario.errors.full_messages.each do |msg|
+        %p.text-warning= msg
+  .row
+    .col-md-4
+      .form-group
+        = f.label :name
+        = f.text_field :name, :class => 'form-control', :placeholder => "Name your Scenario"
+
+  .row
+    .col-md-8
+      .form-group
+        = f.label :description, "Description"
+        = f.text_area :description, :rows => 8, :class => 'form-control', :placeholder => "Describe what this Scenario will do."
+  .row
+    .col-md-8
+      .form-group
+        = f.label :data, "Scenario JSON"
+        = f.text_area :data, :rows => 8, :class => 'form-control', :placeholder => "Scenario JSON"
+
+  .row
+    .col-md-4
+      .form-group
+        %div
+          = f.label :icon
+          = f.select(:icon, options_for_select(Scenario.icons, scenario.icon), {}, {:style => "font-family:'FontAwesome', Arial; width: 100%;", :class => 'select2-fountawesome-icon'})
+    .col-md-2
+      .form-group
+        = f.label :tag_bg_color, "Tag Background Color"
+        = f.color_field :tag_bg_color, :class => 'form-control', :value => @scenario.tag_bg_color || default_scenario_bg_color
+    .col-md-2
+      .form-group
+        = f.label :tag_fg_color, "Tag Foreground Color"
+        = f.color_field :tag_fg_color, :class => 'form-control', :value => @scenario.tag_fg_color || default_scenario_fg_color
+  .row
+    .col-md-12
+      .form-actions{:style => "clear: both"}
+        = f.submit "Save Scenario", :class => "btn btn-primary"
+
+:coffeescript
+  $ ->
+    format = (icon) ->
+      originalOption = icon.element
+      '<i class="fa ' + $(originalOption).data('icon') + '"></i> ' + icon.text
+
+    $('.select2-fountawesome-icon').select2
+      formatResult: format
