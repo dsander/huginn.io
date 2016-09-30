@@ -1,0 +1,10 @@
+.row
+  .col-lg-3
+    %ul.nav.nav-pills.nav-stacked
+      %li{role: 'presentation'}
+        = link_to 'About', documentation_path('about')
+      %li{role: 'presentation'}
+        = link_to 'Concepts', documentation_path('concepts')
+
+  .col-lg-9.markdown-container
+    = render "#{params[:id].presence || 'about'}.md"

@@ -23,6 +23,7 @@ gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'octokit', '~> 4.3.0'
 gem 'parser', '~> 2.3.1.2'
+gem 'kramdown', '~> 1.5.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

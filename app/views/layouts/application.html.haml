@@ -20,9 +20,11 @@
             Communin
         .collapse.navbar-collapse#main-navigation
           %ul.nav.navbar-nav
-            = nav_link "Scenarios", scenarios_path, 'scenarios'
+            = nav_link 'Docs', documentation_index_path, 'documentation'
           %ul.nav.navbar-nav
             = nav_link "Agent Database", agents_path, 'agents'
+          %ul.nav.navbar-nav
+            = nav_link "Scenarios", scenarios_path, 'scenarios'
           %ul.nav.navbar-nav
             = nav_link "Agent Gems", agent_gems_path, 'agent_gems'
           %ul.nav.navbar-nav.navbar-right
