@@ -19,5 +19,5 @@
     .field
       = f.label :data
       %br
-      = f.text_area :data
+      = f.text_area :data, value: f.object.data.is_a?(String) ? f.object.data : f.object.data.to_json
     = f.submit
