@@ -8,10 +8,10 @@ class Scenario < ApplicationRecord
 
   def agents_json_valid?
     begin
-      self[:data] = JSON.parse(self.data) unless self.data.blank?
+      self.data = JSON.parse(data) unless data.blank?
       return true
     rescue JSON::ParserError
-      errors.add(:data, message: "not in JSON format")
+      errors.add(:data, "not in JSON format")
     end
   end
 end
