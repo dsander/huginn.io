@@ -1,0 +1,25 @@
+.container.scenario-import
+  .row
+    .col-md-12
+      = if @scenario_import.errors.any?
+        .row.well
+          %h2
+            = pluralize(@scenario_import.errors.count, "error")
+            prohibited this Scenario from being imported:
+          = @scenario_import.errors.full_messages.each do |msg|
+            %p.text-warning= msg
+
+  = form_for @scenario_import, multipart: true do |f|
+    = f.hidden_field :data
+
+    - if @scenario_import.step_one?
+      = preserve do
+        = render 'step_one', f: f
+    - elsif @scenario_import.step_two?
+      = preserve do
+        = render 'step_two', f: f
+
+  %hr
+  .row
+    .col-md-12
+      = link_to 'Back', scenarios_path, class: "btn btn-default"

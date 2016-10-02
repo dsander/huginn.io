@@ -41,6 +41,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.extend ControllerMacros, type: :controller
   config.include ControllerMacros, type: :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

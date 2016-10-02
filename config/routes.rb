@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {omniauth_callbacks: 'omniauth_callbacks'}
 
-  resources :scenarios do
+  resources :scenarios, only: [:index, :show, :destroy] do
     collection do
       get :search
     end
   end
+  resources :scenario_imports, only: [:new, :create]
   resources :agents, only: [:index] do
     collection do
       get :search

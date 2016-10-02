@@ -8,4 +8,8 @@ module ApplicationHelper
   def active_nav_class(path)
     path[:controller].include?(params[:controller]) ? 'active' : ''
   end
+
+  def markdown(source)
+    Kramdown::Document.new(source || "").to_html.html_safe
+  end
 end

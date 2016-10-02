@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "name": "IFTTT Roundtrip",
+  "description": "To use this scenario you need to connect to the [IFTTT Maker Channel](https://ifttt.com/maker) and create a `ifttt_maker_channel_key` credential with the content of your Maker Channel key. Make sure your Huginn instance is reachable from the internet and copy the web hook URL of the IFTTT Receiver agent.\r\n\r\nCreate a new recipe on IFTT with the following configuration:\r\n\r\nIf `Maker` -> `Receive a web request`\r\n\r\n* event name: `huginn_event`\r\n\r\nThen `Maker` -> `Make a web request`:\r\n\r\n* URL: Paste your IFTTT Receiver web hook URL\r\n* method: `POST`\r\n* content_type: `application/json`\r\n* body: `{\"event_name\": \"{{EventName}}\", \"value1\": \"{{Value1}}\", \"value2\": \"{{Value2}}\", \"value3\": \"{{Value3}}\"}`\r\n\r\nRun the IFTTT Trigger agent, an event should be received back from IFTTT within a few seconds.",
+  "source_url": false,
+  "guid": "b6e0d1ed7e6d818c2a7200995a9e0462",
+  "tag_fg_color": "#ffffff",
+  "tag_bg_color": "#5bc0de",
+  "exported_at": "2016-04-06T11:44:21Z",
+  "agents": [
+    {
+      "type": "Agents::WebhookAgent",
+      "name": "IFTTT Receiver",
+      "disabled": false,
+      "guid": "18d7981684d1e07c309f25cfe6d05b14",
+      "options": {
+        "secret": "supersecretstring",
+        "expected_receive_period_in_days": 1,
+        "payload_path": "."
+      },
+      "keep_events_for": 0
+    },
+    {
+      "type": "Agents::PostAgent",
+      "name": "IFTTT Trigger",
+      "disabled": false,
+      "guid": "513e490b2d9b8a65ed8eae543b92f6df",
+      "options": {
+        "post_url": "https://maker.ifttt.com/trigger/huginn_event/with/key/{% credential ifttt_maker_channel_key%}",
+        "expected_receive_period_in_days": "1",
+        "content_type": "json",
+        "method": "post",
+        "emit_events": "true",
+        "no_merge": "false",
+        "payload": {
+          "value1": "v1",
+          "value2": "v2",
+          "value3": "v3"
+        }
+      },
+      "schedule": "never",
+      "keep_events_for": 0,
+      "propagate_immediately": false
+    }
+  ],
+  "links": [
+
+  ],
+  "control_links": [
+
+  ]
+}
