@@ -129,6 +129,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.0.2)
     jwt (1.5.4)
+    kramdown (1.5.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -323,6 +324,7 @@ DEPENDENCIES
   haml (~> 4.0.7)
   jbuilder (~> 2.5)
   jquery-rails
+  kramdown (~> 1.5.0)
   letter_opener (~> 1.4.1)
   listen (~> 3.0.5)
   octokit (~> 4.3.0)

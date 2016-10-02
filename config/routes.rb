@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
   resources :agent_gems, only: [:index]
+  resources :documentation, only: [:index, :show]
 
   root to: 'welcome#index'
 end
