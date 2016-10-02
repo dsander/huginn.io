@@ -27,7 +27,7 @@ class Scenario < ApplicationRecord
 
   def validate_scenario_agents_array
     errors.add(:base, "data[\"agents\"] is not an array") unless data["agents"].is_a?(Array)
-    error.empty?
+    errors.empty?
   end
 
   def validate_agents_hash

@@ -26,7 +26,7 @@ RSpec.describe ScenariosController, type: :controller do
   # Scenario. As you add validations to Scenario, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { user: users(:bob), name: "test", data: "{\"test\":\"hubs\"}"}
+    { user: users(:bob), name: "test", data: "{\"schema_version\":1,\"name\":\"test\",\"description\":\"No description provided\",\"guid\":\"2d99fa86351e84316c4797509579d46d\",\"agents\":[{\"type\":\"Agents::EventFormattingAgent\",\"name\":\"array test\"}]}"}
   }
 
   let(:invalid_attributes) {
