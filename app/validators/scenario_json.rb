@@ -1,12 +1,7 @@
 class ScenarioJson < ActiveModel::Validator
   def validate(record)
-    record.errors.add(:data, "not in JSON format") unless options[:data_is_json]
-    return true if options[:data_is_json] && validate_data_hash(record) && validate_scenario(record) && validate_scenario_agents_array(record) && validate_agents_hash(record) && validate_scenario_agents(record)
-  end
-
-  def validate_data_hash(record)
-    record.errors.add(:base, "data is not a JSON object.") unless record.data.is_a?(Hash)
-    record.errors.empty?
+    record.errors.add(:data, "not a JSON object") unless record.data.is_a?(Hash)
+    return true if record.data.is_a?(Hash) && validate_scenario(record) && validate_scenario_agents_array(record) && validate_agents_hash(record) && validate_scenario_agents(record)
   end
 
   def validate_scenario(record)
