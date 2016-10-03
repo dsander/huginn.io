@@ -50,28 +50,28 @@
 
       - agent_diff.each_field do |field, value|
         .row
-          .col-md-4
+          .col-md-12
             .form-group
               = label_tag "", field.titleize
-              %div
-                The value be change from: 
-                %code
-                  = value.current.to_s
-                = " to "
-                %code
-                  = value.updated
+              changed from
+              %code
+                = value.current.to_s
+              = " to "
+              %code
+                = value.updated
 
       .row
         - if agent_diff.options.requires_merge?
           .col-md-12
             %label
               Options
-          .col-md-6
-            %pre.options= Utils.pretty_jsonify(agent_diff.options.updated)
-          .col-md-6
-            %div
-              Your current options:
-            %pre.options= Utils.pretty_jsonify agent_diff.options.current
+          .col-md-12
+            %pre.options{'data-index': index}
+          :coffeescript
+            old = #{agent_diff.options.current.to_json}
+            updated = #{agent_diff.options.updated.to_json}
+            delta = jsondiffpatch.diff(old, updated)
+            $("pre[data-index=#{index}]").html(jsondiffpatch.formatters.html.format(delta, old))
 
 .row
   .col-md-12

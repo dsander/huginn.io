@@ -63,14 +63,13 @@ RSpec.feature "ScenarioImport", type: :feature do
       visit new_scenario_import_path
       attach_file('Option 2: Upload a Scenario JSON File', File.join(Rails.root, 'spec/data/ifttt-roundtrip-changed-scenario.json'))
       click_on 'Start Import'
-      expect(page).to have_text(' Your current options:')
       expect(page).to have_text('v10')
       expect(page).to have_text('This Scenario already exists in Huginn.io')
-      expect(page).to have_text('The value be change from: IFTTT Trigger to IFTTT Trigger (Updated) ')
-      expect(page).to have_text('The value be change from: never to 6h')
-      expect(page).to have_text('The value be change from: 0 to 3600')
-      expect(page).to have_text('The value be change from: false to true')
-      expect(page).to have_text('The value be change from: false to true')
+      expect(page).to have_text('Name changed from IFTTT Trigger to IFTTT Trigger (Updated)')
+      expect(page).to have_text('Schedule changed from never to 6h')
+      expect(page).to have_text('Keep Events For changed from 0 to 3600')
+      expect(page).to have_text('Propagate Immediately changed from false to true')
+      expect(page).to have_text('Disabled changed from false to true')
       check('I confirm that I want to import these Agents.')
       expect {
         click_on 'Finish Import'
