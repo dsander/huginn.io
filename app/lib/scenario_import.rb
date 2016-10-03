@@ -177,11 +177,11 @@ class ScenarioImport
     end
 
     def each_field
-      yield 'name', name if name.requires_merge?
-      yield 'schedule', schedule if self['schedule'].present? && schedule.requires_merge?
-      yield 'keep_events_for', keep_events_for if self['keep_events_for'].present? && keep_events_for.requires_merge?
-      yield 'propagate_immediately', propagate_immediately if self['propagate_immediately'].present? && propagate_immediately.requires_merge?
-      yield 'disabled', disabled if disabled.requires_merge?
+      yield 'name', self['name'] if self['name'].requires_merge?
+      yield 'schedule', self['schedule'] if self['schedule'].present? && (!agent_exists? || self['schedule'].requires_merge?)
+      yield 'keep_events_for', self['keep_events_for'] if self['keep_events_for'].present? && (!agent_exists? || self['keep_events_for'].requires_merge?)
+      yield 'propagate_immediately', self['propagate_immediately'] if self['propagate_immediately'].present? && (!agent_exists? || self['propagate_immediately'].requires_merge?)
+      yield 'disabled', self['disabled'] if (!agent_exists? || self['disabled'].requires_merge?)
     end
   end
 end

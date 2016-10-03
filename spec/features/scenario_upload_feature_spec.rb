@@ -13,7 +13,7 @@ RSpec.feature "ScenarioImport", type: :feature do
     click_on 'Start Import'
     expect(page).to have_text('To use this scenario you need to connect to the')
     expect(page).not_to have_text('This Scenario already exists in your system.')
-    check('I confirm that I want to import these Agents.')
+    check('I confirm that I want to upload this Scenario.')
     expect {
       click_on 'Finish Import'
     }.to change(Scenario, :count).by(1)
@@ -50,7 +50,7 @@ RSpec.feature "ScenarioImport", type: :feature do
       visit new_scenario_import_path
       fill_in('Option 1: Provide a Public Scenario URL', with: 'http://example.com/scenario.json')
       click_on 'Start Import'
-      check('I confirm that I want to import these Agents.')
+      check('I confirm that I want to upload this Scenario.')
       expect {
         click_on 'Finish Import'
       }.to change(Scenario, :count).by(1)
@@ -58,7 +58,7 @@ RSpec.feature "ScenarioImport", type: :feature do
   end
 
   context 'updating existing scenarios' do
-    it 'shows the changed options' do
+    it 'shows the changed options', js: true do
       upload_scenario_json
       visit new_scenario_import_path
       attach_file('Option 2: Upload a Scenario JSON File', File.join(Rails.root, 'spec/data/ifttt-roundtrip-changed-scenario.json'))
@@ -70,7 +70,7 @@ RSpec.feature "ScenarioImport", type: :feature do
       expect(page).to have_text('Keep Events For changed from 0 to 3600')
       expect(page).to have_text('Propagate Immediately changed from false to true')
       expect(page).to have_text('Disabled changed from false to true')
-      check('I confirm that I want to import these Agents.')
+      check('I confirm that I want to upload this Scenario.')
       expect {
         click_on 'Finish Import'
       }.to change(Scenario, :count).by(0)

@@ -11,7 +11,7 @@
     {
       "type": "Agents::WebhookAgent",
       "name": "IFTTT Receiver",
-      "disabled": false,
+      "disabled": true,
       "guid": "18d7981684d1e07c309f25cfe6d05b14",
       "options": {
         "secret": "supersecretstring",
