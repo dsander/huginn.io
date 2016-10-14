@@ -16,9 +16,15 @@ class ScenarioImport
   before_validation :parse_file
   before_validation :fetch_url
 
-  validate :validate_presence_of_file_url_or_data
   validates_format_of :url, :with => URL_REGEX, :allow_nil => true, :allow_blank => true, :message => "appears to be invalid"
-  validate :validate_data
+  validates :parsed_data, scenario_json: true
+
+  after_validation do
+    if errors.present?
+      self.data = nil
+      @parsed_data = nil
+    end
+  end
 
   def step_one?
     data.blank?
@@ -54,7 +60,7 @@ class ScenarioImport
     description = parsed_data['description']
     name        = parsed_data['name']
     @scenario = user.scenarios.where(:guid => guid).first_or_initialize
-    @scenario.update_attributes!(name: name, description: description, data: data)
+    @scenario.update_attributes!(name: name, description: description, data: parsed_data)
 
     success
   end
@@ -74,24 +80,6 @@ class ScenarioImport
   def fetch_url
     if data.blank? && url.present? && url =~ URL_REGEX
       self.data = Faraday.get(url).body
-    end
-  end
-
-  def validate_data
-    if data.present?
-      @parsed_data = JSON.parse(data) rescue {}
-      if !@parsed_data.is_a?(Hash) || (%w[name guid agents] - @parsed_data.keys).length > 0
-        errors.add(:base, "The provided data does not appear to be a valid Scenario.")
-        self.data = nil
-      end
-    else
-      @parsed_data = nil
-    end
-  end
-
-  def validate_presence_of_file_url_or_data
-    unless file.present? || url.present? || data.present?
-      errors.add(:base, "Please provide either a Scenario JSON File or a Public Scenario URL.")
     end
   end
 

@@ -1,12 +1,8 @@
 class Scenario < ApplicationRecord
   belongs_to :user
 
-  before_validation do
-    self.data = JSON.parse(data) rescue data
-  end
-
   validates :name, :data, presence: true
-  validates_with ScenarioJson
+  validates :data, scenario_json: true
 
   def self.search(term)
     where('name ILIKE ? OR description ILIKE ?', "%#{term}%", "%#{term}%")

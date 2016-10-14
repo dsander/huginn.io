@@ -1,12 +1,12 @@
 .container.scenario-import
   .row
     .col-md-12
-      = if @scenario_import.errors.any?
+      - if @scenario_import.errors.any?
         .row.well
           %h2
             = pluralize(@scenario_import.errors.count, "error")
             prohibited this Scenario from being imported:
-          = @scenario_import.errors.full_messages.each do |msg|
+          - @scenario_import.errors.full_messages.each do |msg|
             %p.text-warning= msg
 
   = form_for @scenario_import, multipart: true do |f|

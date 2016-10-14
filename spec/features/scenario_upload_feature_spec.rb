@@ -34,7 +34,7 @@ RSpec.feature "ScenarioImport", type: :feature do
     visit new_scenario_import_path
     attach_file('Option 2: Upload a Scenario JSON File', File.join(Rails.root, 'spec/data/agents.json'))
     click_on 'Start Import'
-    expect(page).to have_text('The provided data does not appear to be a valid Scenario.')
+    expect(page).to have_text('Please provide either a Scenario JSON File or a Public Scenario URL.')
   end
 
   context 'creating new scenarios' do
