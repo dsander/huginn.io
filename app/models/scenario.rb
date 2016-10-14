@@ -21,13 +21,4 @@ class Scenario < ApplicationRecord
   def get_agent_data(guid)
     data['agents'].select { |a| a['guid'] == guid }.first
   end
-
-  protected
-
-  def self.icons
-    @icons ||= begin
-      YAML.load_file(Rails.root.join('config/icons.yml'))
-    end
-  end
-
 end

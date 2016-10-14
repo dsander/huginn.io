@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require select2
 //= require jsondiffpatch
 //= require jsondiffpatch-formatters
 //= require_tree .
