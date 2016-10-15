@@ -1,0 +1,71 @@
+.row
+  .col-md-12
+    - if @scenario_import.existing_scenario.present?
+      .alert.alert-warning
+        %span.glyphicon.glyphicon-warning-sign
+        This Scenario already exists in Huginn.io. The import will update your existing
+        = scenario_label(@scenario_import.existing_scenario)
+        Scenario's title,
+        description, and tag colors. Please verify the changes below.
+    .page-header
+      %h2
+        = @scenario_import.parsed_data["name"]
+        %span.text-muted
+          = "(#{pluralize(@scenario_import.parsed_data["agents"].length, "Agent")}; exported #{time_ago_in_words(Time.parse(@scenario_import.parsed_data["exported_at"]))} ago)"
+
+    - if @scenario_import.parsed_data["description"].present?
+      %blockquote= markdown(@scenario_import.parsed_data["description"])
+.agent-import-list
+  - @scenario_import.agent_diffs.each.with_index do |agent_diff, index|
+    .agent-import{"data-index": index}
+      .row
+        .col-md-12
+          %h3
+            = agent_diff.name.incoming
+            %span.text-muted
+              = "(#{agent_diff.type.incoming}#{" -- WARNING: this Agent's type has been changed." if agent_diff.type.requires_merge?})"
+
+          - if agent_diff.agent_exists?
+            .form-group
+              This Agent exists in your Huginn.io Scenario.
+
+              - if agent_diff.requires_merge?
+                Here are the differences between the current version and the uploaded data.
+
+              - else
+                It's already up-to-date.
+      .form-group
+        - agent_diff.each_field do |name, field|
+          .row
+            .col-md-12
+              = label_tag "", name.titleize
+              - if field.requires_merge?
+                changed from
+                %code
+                  = field.current.to_s
+                = " to "
+              %code
+                = field.updated
+      - if !agent_diff.agent_exists? || agent_diff.options.requires_merge?
+        .row
+          .col-md-12
+            %label
+              Options
+          .col-md-12
+            %pre.options{data: {index: index, requires_merge: agent_diff.options.requires_merge?}}
+          :coffeescript
+            old = #{agent_diff.options.current.to_json}
+            unless old
+              old = {}
+            updated = #{agent_diff.options.updated.to_json}
+            delta = jsondiffpatch.diff(old, updated)
+            $("pre[data-index=#{index}]").html(jsondiffpatch.formatters.html.format(delta, old))
+.row
+  .col-md-12
+    .checkbox
+      = f.label :do_import do
+        = f.check_box :do_import
+        I confirm that I want to upload this Scenario.
+
+    .form-actions
+      = f.submit "Finish Import", class: "btn btn-primary"

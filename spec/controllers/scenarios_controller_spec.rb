@@ -26,7 +26,7 @@ RSpec.describe ScenariosController, type: :controller do
   # Scenario. As you add validations to Scenario, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { user: users(:bob), name: "test", data: "{\"schema_version\":1,\"name\":\"test\",\"description\":\"No description provided\",\"guid\":\"2d99fa86351e84316c4797509579d46d\",\"agents\":[{\"type\":\"Agents::EventFormattingAgent\",\"name\":\"array test\"}]}"}
+    { user: users(:bob), name: "test", data: JSON.parse("{\"schema_version\":1,\"name\":\"test\",\"description\":\"No description provided\",\"guid\":\"2d99fa86351e84316c4797509579d46d\",\"agents\":[{\"type\":\"Agents::EventFormattingAgent\",\"name\":\"array test\"}]}") }
   }
 
   let(:invalid_attributes) {
@@ -52,95 +52,6 @@ RSpec.describe ScenariosController, type: :controller do
       scenario = Scenario.create! valid_attributes
       get :show, params: {id: scenario.to_param}, session: valid_session
       expect(assigns(:scenario)).to eq(scenario)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new scenario as @scenario" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:scenario)).to be_a_new(Scenario)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested scenario as @scenario" do
-      scenario = Scenario.create! valid_attributes
-      get :edit, params: {id: scenario.to_param}, session: valid_session
-      expect(assigns(:scenario)).to eq(scenario)
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Scenario" do
-        expect {
-          post :create, params: {scenario: valid_attributes}, session: valid_session
-        }.to change(Scenario, :count).by(1)
-      end
-
-      it "assigns a newly created scenario as @scenario" do
-        post :create, params: {scenario: valid_attributes}, session: valid_session
-        expect(assigns(:scenario)).to be_a(Scenario)
-        expect(assigns(:scenario)).to be_persisted
-      end
-
-      it "redirects to the created scenario" do
-        post :create, params: {scenario: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Scenario.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved scenario as @scenario" do
-        post :create, params: {scenario: invalid_attributes}, session: valid_session
-        expect(assigns(:scenario)).to be_a_new(Scenario)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {scenario: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        scenarios(:bob_weather).attributes
-      }
-
-      it "updates the requested scenario" do
-        scenario = Scenario.create! valid_attributes
-        put :update, params: {id: scenario.to_param, scenario: new_attributes}, session: valid_session
-        scenario.reload
-        expect(assigns(:scenario)).to eq(scenario)
-      end
-
-      it "assigns the requested scenario as @scenario" do
-        scenario = Scenario.create! valid_attributes
-        put :update, params: {id: scenario.to_param, scenario: valid_attributes}, session: valid_session
-        expect(assigns(:scenario)).to eq(scenario)
-      end
-
-      it "redirects to the scenario" do
-        scenario = Scenario.create! valid_attributes
-        put :update, params: {id: scenario.to_param, scenario: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(scenario)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the scenario as @scenario" do
-        scenario = Scenario.create! valid_attributes
-        put :update, params: {id: scenario.to_param, scenario: invalid_attributes}, session: valid_session
-        expect(assigns(:scenario)).to eq(scenario)
-      end
-
-      it "re-renders the 'edit' template" do
-        scenario = Scenario.create! valid_attributes
-        put :update, params: {id: scenario.to_param, scenario: invalid_attributes}, session: valid_session
-        expect(response).to render_template(:edit)
-      end
     end
   end
 

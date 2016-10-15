@@ -20,3 +20,19 @@ h3 {
     max-width: 100%;
   }
 }
+
+// override jsondiffpatch background color for the import of new scenarios
+pre:not([data-requires-merge]) {
+  .jsondiffpatch-added .jsondiffpatch-property-name,
+    .jsondiffpatch-added .jsondiffpatch-value pre,
+    .jsondiffpatch-modified .jsondiffpatch-right-value pre,
+    .jsondiffpatch-textdiff-added {
+    background: none;
+  }
+}
+
+.jsondiffpatch-delta {
+  pre {
+    border: none;
+  }
+}

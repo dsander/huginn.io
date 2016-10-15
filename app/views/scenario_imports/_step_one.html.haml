@@ -1,0 +1,19 @@
+.row
+  .page-header
+    %h2
+      Add a Scenario to Huginn.io
+.row
+  %blockquote
+    You can import Scenarios, either from a <code>.json</code> file, or via a public
+    Scenario URL. When you import a Scenario URL, Huginn.io will keep track of where
+    it came from and automatically update it.
+.row
+  .col-md-4
+    .form-group
+      = f.label :url, 'Option 1: Provide a Public Scenario URL'
+      = f.text_field :url, class: 'form-control', placeholder: 'Public Scenario URL'
+    .form-group
+      = f.label :file, 'Option 2: Upload a Scenario JSON File'
+      = f.file_field :file, class: 'form-control', accept: 'application/json'
+    .form-actions
+      = f.submit "Start Import", class: "btn btn-primary"
