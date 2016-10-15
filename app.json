@@ -1,0 +1,22 @@
+{
+  "name": "Communin",
+  "description": "A community site for Huginn",
+  "website": "https://github.com/huginn/communin",
+  "repository": "https://github.com/huginn/communin",
+  "env": {
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ]
+}
