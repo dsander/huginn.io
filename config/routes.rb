@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+    member do
+      get :download
+    end
   end
   resources :scenario_imports, only: [:new, :create]
   resources :agents, only: [:index] do

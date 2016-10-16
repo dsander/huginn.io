@@ -1,0 +1,34 @@
+%h3{id: scenario.to_param}
+  = link_to scenario.name,scenario
+  - if scenario.icon.blank?
+    = scenario_label(scenario, icon('gear'))
+  - else
+    = scenario_label(scenario, icon(scenario.icon))
+
+  .btn-group.btn-group-xs.pull-right
+    - if show
+      = link_to 'Back', scenarios_path, class: "btn btn-default"
+    - else
+      = link_to 'Download', download_scenario_path(scenario), class: "btn btn-default"
+      = link_to 'Details', scenario, class: "btn btn-default"
+    - if current_user && current_user.id == scenario.user_id
+      = link_to 'Delete', scenario_path(scenario), method: :delete, class: "btn btn-danger"
+.well.description
+  = markdown(scenario.description)
+- if show
+  - scenario.data['agents'].each_with_index do |agent, index|
+    %h4
+      = agent['name']
+      %span.text-muted
+        = surround ' (', ')' do
+          = link_to agent['type'].gsub(/^.*::/, ''), agents_path(anchor: agent['type'].gsub(/^.*::/, ''))
+    - %w{schedule keep_events_for propagate_immediately disabled}.each do |attr|
+      - unless agent[attr].nil?
+        = label_tag attr
+        = agent[attr]
+        %br
+    %pre.options{data: {index: index, requires_merge: false}}
+    :coffeescript
+      updated = #{agent['options'].to_json}
+      delta = jsondiffpatch.diff({}, updated)
+      $("pre[data-index=#{index}]").html(jsondiffpatch.formatters.html.format(delta, {}))
