@@ -3,7 +3,7 @@ require 'agent_importer'
 
 RSpec.describe AgentImporter, type: :model do
   it 'imports Agent Gems from a valid JSON file' do
-    data = JSON.parse(File.read(File.join(Rails.root, 'spec/data/agents.json')))
+    data = load_json_data('spec/data/agents.json')
     expect {
       AgentImporter.run(data)
     }.to change(AgentGem, :count).by(1)
@@ -19,7 +19,7 @@ RSpec.describe AgentImporter, type: :model do
   end
 
   it 'imports Agents from a valid JSON file' do
-    data = JSON.parse(File.read(File.join(Rails.root, 'spec/data/agents.json')))
+    data = load_json_data('spec/data/agents.json')
     expect {
       AgentImporter.run(data)
     }.to change(Agent, :count).by(71)

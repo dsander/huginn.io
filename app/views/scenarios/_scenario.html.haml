@@ -16,19 +16,20 @@
 .well.description
   = markdown(scenario.description)
 - if show
-  - scenario.data['agents'].each_with_index do |agent, index|
-    %h4
-      = agent['name']
+  = render_agents_diagram(scenario.agents, layout: 'dot')
+  - scenario.agents.each do |agent|
+    %h4{id: agent.guid}
+      = agent.name
       %span.text-muted
         = surround ' (', ')' do
-          = link_to agent['type'].gsub(/^.*::/, ''), agents_path(anchor: agent['type'].gsub(/^.*::/, ''))
+          = link_to agent.short_type, agents_path(anchor: agent.short_type)
     - %w{schedule keep_events_for propagate_immediately disabled}.each do |attr|
-      - unless agent[attr].nil?
+      - unless agent.send(attr).nil?
         = label_tag attr
-        = agent[attr]
+        = agent.send(attr.to_sym)
         %br
-    %pre.options{data: {index: index, requires_merge: false}}
+    %pre.options{data: {index: agent.guid, requires_merge: false}}
     :coffeescript
-      updated = #{agent['options'].to_json}
+      updated = #{agent.options.to_json}
       delta = jsondiffpatch.diff({}, updated)
-      $("pre[data-index=#{index}]").html(jsondiffpatch.formatters.html.format(delta, {}))
+      $("pre[data-index=#{agent.guid}]").html(jsondiffpatch.formatters.html.format(delta, {}))

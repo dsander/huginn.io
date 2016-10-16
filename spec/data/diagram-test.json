@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "name": "Diagramm test",
+  "description": "No description provided",
+  "source_url": false,
+  "guid": "ecf137fadc302a768df95a18223486ae",
+  "tag_fg_color": "#ffffff",
+  "tag_bg_color": "#5bc0de",
+  "icon": "truck",
+  "exported_at": "2016-10-16T19:23:54Z",
+  "agents": [
+    {
+      "type": "Agents::WebhookAgent",
+      "name": "IFTTT Receiver",
+      "disabled": false,
+      "guid": "18d7981684d1e07c309f25cfe6d05b14",
+      "options": {
+        "secret": "supersecretstring",
+        "expected_receive_period_in_days": 1,
+        "payload_path": "."
+      },
+      "keep_events_for": 0
+    },
+    {
+      "type": "Agents::CommanderAgent",
+      "name": "Only command",
+      "disabled": false,
+      "guid": "3a5e960472b27c4432229f2dba34ec66",
+      "options": {
+        "action": "run"
+      },
+      "schedule": "never",
+      "propagate_immediately": false
+    },
+    {
+      "type": "Agents::PostAgent",
+      "name": "IFTTT Trigger",
+      "disabled": true,
+      "guid": "513e490b2d9b8a65ed8eae543b92f6df",
+      "options": {
+        "post_url": "https://maker.ifttt.com/trigger/huginn_event/with/key/{% credential ifttt_maker_channel_key%}",
+        "expected_receive_period_in_days": "1",
+        "content_type": "json",
+        "method": "post",
+        "emit_events": "true",
+        "no_merge": "false",
+        "payload": {
+          "value1": "v1",
+          "value2": "v2",
+          "value3": "v3"
+        },
+        "test": "??"
+      },
+      "schedule": "never",
+      "keep_events_for": 0,
+      "propagate_immediately": false
+    },
+    {
+      "type": "Agents::CommanderAgent",
+      "name": "Command and receive with a really long name that should wrap",
+      "disabled": false,
+      "guid": "773e92a042fbfb4c4cfba3b5ddeccbcc",
+      "options": {
+        "action": "configure",
+        "configure_options": {
+          "test": "??"
+        }
+      },
+      "schedule": "every_1m",
+      "propagate_immediately": true
+    },
+    {
+      "type": "Agents::SchedulerAgent",
+      "name": "Scheduler",
+      "disabled": false,
+      "guid": "90410b0308e7228eb6c9ebbef2ad13ae",
+      "options": {
+        "action": "run",
+        "schedule": "0 * * * *"
+      }
+    },
+    {
+      "type": "Agents::JsonParseAgent",
+      "name": "Receive and emit",
+      "disabled": false,
+      "guid": "afb6f224595f52dc3f4b5cec62bf943a",
+      "options": {
+        "data": "{{ body }}",
+        "data_key": "data"
+      },
+      "keep_events_for": 0,
+      "propagate_immediately": false
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "receiver": 2
+    },
+    {
+      "source": 5,
+      "receiver": 3
+    }
+  ],
+  "control_links": [
+    {
+      "controller": 1,
+      "control_target": 1
+    },
+    {
+      "controller": 3,
+      "control_target": 2
+    },
+    {
+      "controller": 4,
+      "control_target": 3
+    }
+  ]
+}
