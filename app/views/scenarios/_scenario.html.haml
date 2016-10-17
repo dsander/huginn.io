@@ -14,6 +14,10 @@
         = link_to 'Details', scenario, class: "btn btn-default"
       - if current_user && current_user.id == scenario.user_id
         = link_to 'Delete', scenario_path(scenario), method: :delete, class: "btn btn-danger"
+  %p
+    - scenario.agents.uniq(&:short_type).each do |agent|
+      = link_to agents_path(anchor: agent.short_type) do
+        %span.label.label-default= agent.human_name
   .well.description
     = markdown(scenario.description)
   - if show

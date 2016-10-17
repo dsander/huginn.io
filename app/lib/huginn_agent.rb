@@ -19,6 +19,10 @@ class HuginnAgent
     type.gsub(/^.*::/, '')
   end
 
+  def human_name
+    short_type.sub('Agent', '')
+  end
+
   def model
     @agent ||= Agent.find_by(name: short_type)
   end
