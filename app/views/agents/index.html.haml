@@ -1,21 +1,21 @@
-
-.row
-  .col-lg-3
-    = bootstrap_form_tag url: search_agents_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: 'hidden', enforce_utf8: false do |f|
-      = f.text_field :q, value: params[:q], placeholder: 'Search through Agents', skip_label: true
-    %ul.nav.nav-pills.nav-stacked
-      - @agents.each do |a|
-        %li{role: 'presentation'}
-          = link_to agent_name(a.name), "##{a.name}"
-  .col-lg-9
-    - @agents.each do |agent|
-      %h3{id: agent.name}
-        = agent_name agent.name
-        = features agent
-        - if agent.agent_gem
-          = link_to agent_gems_path(anchor: agent.agent_gem.name) do
-            %span.label.label-info
-              = agent.agent_gem.name
-      .well.description
-        != agent.description
-      %hr
+- cache_if params[:q].nil?, @agents do
+  .row
+    .col-lg-3
+      = bootstrap_form_tag url: search_agents_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: 'hidden', enforce_utf8: false do |f|
+        = f.text_field :q, value: params[:q], placeholder: 'Search through Agents', skip_label: true
+      %ul.nav.nav-pills.nav-stacked
+        - @agents.each do |a|
+          %li{role: 'presentation'}
+            = link_to agent_name(a.name), "##{a.name}"
+    .col-lg-9
+      - @agents.each do |agent|
+        %h3{id: agent.name}
+          = agent_name agent.name
+          = features agent
+          - if agent.agent_gem
+            = link_to agent_gems_path(anchor: agent.agent_gem.name) do
+              %span.label.label-info
+                = agent.agent_gem.name
+        .well.description
+          != agent.description
+        %hr
