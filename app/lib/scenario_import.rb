@@ -59,6 +59,7 @@ class ScenarioImport
     name        = parsed_data['name']
     @scenario = user.scenarios.where(guid: guid).first_or_initialize
     @scenario.update_attributes!(name: name, description: description, data: parsed_data)
+    @scenario.update_attributes!(name: name, description: description, data: parsed_data, url: url.presence)
 
     success
   end
