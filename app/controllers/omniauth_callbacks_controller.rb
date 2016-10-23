@@ -1,10 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
-    if current_user
-      current_user.update_omniauth_attributes!(request.env["omniauth.auth"])
-      redirect_to root_path, flash: {notice: 'Successfully connected to your GitHub account.'}
-      return
-    end
+    return update_current_user if current_user
 
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
@@ -18,5 +14,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     redirect_to root_path
+  end
+
+  private
+
+  def update_current_user
+    current_user.update_omniauth_attributes!(request.env["omniauth.auth"])
+    redirect_to root_path, flash: {notice: 'Successfully connected to your GitHub account.'}
   end
 end

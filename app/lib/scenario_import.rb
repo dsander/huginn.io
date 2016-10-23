@@ -9,14 +9,12 @@ class ScenarioImport
 
   URL_REGEX = /\Ahttps?:\/\//i
 
-  attr_accessor :file, :url, :data, :do_import, :merges
-
-  attr_reader :user
+  attr_accessor :file, :url, :data, :do_import, :merges, :user
 
   before_validation :parse_file
   before_validation :fetch_url
 
-  validates_format_of :url, :with => URL_REGEX, :allow_nil => true, :allow_blank => true, :message => "appears to be invalid"
+  validates_format_of :url, with: URL_REGEX, allow_nil: true, allow_blank: true, message: "appears to be invalid"
   validates :parsed_data, scenario_json: true
 
   after_validation do
@@ -34,16 +32,16 @@ class ScenarioImport
     data.present?
   end
 
-  def set_user(user)
-    @user = user
-  end
-
   def existing_scenario
     @existing_scenario ||= user.scenarios.find_by(guid: parsed_data["guid"])
   end
 
   def parsed_data
-    @parsed_data ||= (data && JSON.parse(data) rescue {}) || {}
+    @parsed_data ||= (begin
+                        data && JSON.parse(data)
+                      rescue
+                        {}
+                      end) || {}
   end
 
   def agent_diffs
@@ -54,12 +52,12 @@ class ScenarioImport
     do_import == "1"
   end
 
-  def import(options = {})
+  def import(_options = {})
     success = true
     guid        = parsed_data['guid']
     description = parsed_data['description']
     name        = parsed_data['name']
-    @scenario = user.scenarios.where(:guid => guid).first_or_initialize
+    @scenario = user.scenarios.where(guid: guid).first_or_initialize
     @scenario.update_attributes!(name: name, description: description, data: parsed_data)
 
     success
@@ -72,19 +70,17 @@ class ScenarioImport
   protected
 
   def parse_file
-    if data.blank? && file.present?
-      self.data = file.read.force_encoding(Encoding::UTF_8)
-    end
+    return if data.present? || file.blank?
+    self.data = file.read.force_encoding(Encoding::UTF_8)
   end
 
   def fetch_url
-    if data.blank? && url.present? && url =~ URL_REGEX
-      self.data = Faraday.get(url).body
-    end
+    return if data.present? || url.blank? || url !~ URL_REGEX
+    self.data = Faraday.get(url).body
   end
 
   def generate_diff
-    @agent_diffs = (parsed_data['agents'] || []).map.with_index do |agent_data, index|
+    @agent_diffs = (parsed_data['agents'] || []).map.with_index do |agent_data, _index|
       # AgentDiff is defined at the end of this file.
       agent_diff = AgentDiff.new(agent_data)
       if existing_scenario
@@ -100,14 +96,15 @@ class ScenarioImport
   # it differs from the incoming value.
   class AgentDiff < OpenStruct
     class FieldDiff
-      attr_accessor :incoming, :current, :updated
+      attr_accessor :incoming, :updated
+      attr_reader :current
 
       def initialize(incoming)
         @incoming = incoming
         @updated = incoming
       end
 
-      def set_current(current)
+      def current=(current)
         @current = current
         @requires_merge = (incoming != current)
       end
@@ -124,10 +121,10 @@ class ScenarioImport
       store! agent_data
     end
 
-    BASE_FIELDS = %w[name schedule keep_events_for propagate_immediately disabled guid]
+    BASE_FIELDS = %w(name schedule keep_events_for propagate_immediately disabled guid).freeze
 
     def agent_exists?
-      !!agent
+      agent.present?
     end
 
     def requires_merge?
@@ -138,7 +135,7 @@ class ScenarioImport
       self.type = FieldDiff.new(agent_data["type"].split("::").pop)
       self.options = FieldDiff.new(agent_data['options'] || {})
       BASE_FIELDS.each do |option|
-        if agent_data.has_key?(option)
+        if agent_data.key?(option)
           value = agent_data[option]
           self[option] = FieldDiff.new(value)
         end
@@ -150,15 +147,15 @@ class ScenarioImport
 
       self.agent = agent
 
-      type.set_current(agent['type'].gsub(/^.*::/, ''))
-      options.set_current(agent['options'] || {})
+      type.current = agent['type'].gsub(/^.*::/, '')
+      options.current = agent['options'] || {}
 
       @requires_merge ||= type.requires_merge?
       @requires_merge ||= options.requires_merge?
 
       BASE_FIELDS.each do |field|
         next unless self[field].present?
-        self[field].set_current(agent.send(:[], field.to_s))
+        self[field].current = agent.send(:[], field.to_s)
 
         @requires_merge ||= self[field].requires_merge?
       end
@@ -169,7 +166,7 @@ class ScenarioImport
       yield 'schedule', self['schedule'] if self['schedule'].present? && (!agent_exists? || self['schedule'].requires_merge?)
       yield 'keep_events_for', self['keep_events_for'] if self['keep_events_for'].present? && (!agent_exists? || self['keep_events_for'].requires_merge?)
       yield 'propagate_immediately', self['propagate_immediately'] if self['propagate_immediately'].present? && (!agent_exists? || self['propagate_immediately'].requires_merge?)
-      yield 'disabled', self['disabled'] if (!agent_exists? || self['disabled'].requires_merge?)
+      yield 'disabled', self['disabled'] if !agent_exists? || self['disabled'].requires_merge?
     end
   end
 end

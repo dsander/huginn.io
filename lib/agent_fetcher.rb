@@ -11,13 +11,13 @@ class AgentFetcher
         huginn_agents = load_agents
         huginn_agent_names = huginn_agents.map { |agent| agent['name'] }
 
-        gem_data.map do |gem_data|
-          `echo "\\nADDITIONAL_GEMS=#{gem_data[:name]}(github: #{gem_data[:repository]})" >> ../huginn/.env`
+        gem_data.map do |data|
+          `echo "\\nADDITIONAL_GEMS=#{data[:name]}(github: #{data[:repository]})" >> ../huginn/.env`
           `cd ../huginn && bundle install`
           gem_agents = load_agents.reject { |agent| huginn_agent_names.include?(agent['name']) }
-          gem_data[:agents] = gem_agents
-          gem_data
-        end.push({agents: huginn_agents })
+          data[:agents] = gem_agents
+          data
+        end.push(agents: huginn_agents)
       end
     end
 

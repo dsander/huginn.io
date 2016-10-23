@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe AgentGemsController, type: :controller do
-
   describe "GET #index" do
     fixtures :agent_gems
 
