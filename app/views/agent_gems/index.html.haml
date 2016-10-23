@@ -1,31 +1,33 @@
-.row
-  .col-lg-3
-    %ul.nav.nav-pills.nav-stacked
+- cache_if params[:q].nil?, @agent_gems do
+  .row
+    .col-lg-3
+      %ul.nav.nav-pills.nav-stacked
+        - @agent_gems.each do |agent_gem|
+          %li{role: 'presentation'}
+            = link_to agent_name(agent_gem.name), "##{agent_gem.name}"
+    .col-lg-9
       - @agent_gems.each do |agent_gem|
-        %li{role: 'presentation'}
-          = link_to agent_name(agent_gem.name), "##{agent_gem.name}"
-  .col-lg-9
-    - @agent_gems.each do |agent_gem|
-      %h3{id: agent_gem.name}
-        = link_to agent_gem.name, "https://github.com/#{agent_gem.repository}", target: '_blank'
-        %span.small
-          - if agent_gem.version.present?
-            = "(#{agent_gem.version})"
-          %span.glyphicon.glyphicon-star
-          = agent_gem.stars
-          %span.glyphicon.glyphicon-eye-open
-          = agent_gem.watchers
-          %span.label.label-primary
-            = agent_gem.license
+        - cache agent_gem do
+          %h3{id: agent_gem.name}
+            = link_to agent_gem.name, "https://github.com/#{agent_gem.repository}", target: '_blank'
+            %span.small
+              - if agent_gem.version.present?
+                = "(#{agent_gem.version})"
+              %span.glyphicon.glyphicon-star
+              = agent_gem.stars
+              %span.glyphicon.glyphicon-eye-open
+              = agent_gem.watchers
+              %span.label.label-primary
+                = agent_gem.license
 
-      .well.description
-        = agent_gem.summary
-        - if agent_gem.description
-          %p
-            = agent_gem.description
-        %p
-          %ul.list-unstyled
-            - agent_gem.agents.each do |agent|
-              %li
-                = link_to agent_name(agent.name), agents_path(anchor: agent.name)
-      %hr
+          .well.description
+            = agent_gem.summary
+            - if agent_gem.description
+              %p
+                = agent_gem.description
+            %p
+              %ul.list-unstyled
+                - agent_gem.agents.each do |agent|
+                  %li
+                    = link_to agent_name(agent.name), agents_path(anchor: agent.name)
+          %hr

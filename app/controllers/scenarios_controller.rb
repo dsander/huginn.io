@@ -1,10 +1,10 @@
 class ScenariosController < ApplicationController
-  before_action :set_scenario, only: [:show, :edit, :update, :destroy]
+  before_action :load_scenario, only: [:show, :download]
 
   # GET /scenarios
   # GET /scenarios.json
   def index
-    @scenarios = current_user.scenarios.all
+    @scenarios = Scenario.all
   end
 
   # GET /scenarios/1
@@ -15,10 +15,15 @@ class ScenariosController < ApplicationController
   # DELETE /scenarios/1
   # DELETE /scenarios/1.json
   def destroy
+    @scenario = current_user.scenarios.find(params[:id])
     @scenario.destroy
     respond_to do |format|
       format.html { redirect_to scenarios_url, notice: 'Scenario was successfully destroyed.' }
     end
+  end
+
+  def download
+    send_data @scenario.data.to_json, filename: "#{@scenario.name}.json"
   end
 
   def search
@@ -28,8 +33,8 @@ class ScenariosController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_scenario
-    @scenario = current_user.scenarios.find(params[:id])
+
+  def load_scenario
+    @scenario = Scenario.find(params[:id])
   end
 end

@@ -1,4 +1,6 @@
 class ScenarioImportsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @scenario_import = ScenarioImport.new(url: params[:url])
   end

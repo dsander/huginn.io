@@ -5,25 +5,9 @@
     %ul.nav.nav-pills.nav-stacked
       %li{role: 'presentation'}
         = link_to 'New Scenario', new_scenario_import_path
-      - @scenarios.each do |a|
+      - @scenarios.each do |scenario|
         %li{role: 'presentation'}
-          = link_to agent_name(a.name), "##{a.name}"
+          = link_to scenario.name, anchor: scenario
   .col-lg-9
     - @scenarios.each do |scenario|
-      %h3{id: scenario.name}
-        = agent_name scenario.name
-        - if scenario.icon.blank?
-          = scenario_label(scenario, icon('gear'))
-        - else
-          = scenario_label(scenario, icon(scenario.icon))
-
-        .btn-group.btn-group-xs{:style => "float: right"}
-          = link_to 'Show', scenario, class: "btn btn-default"
-          = link_to 'Delete', scenario_path(scenario), method: :delete, class: "btn btn-danger"
-      -#   - if agent.agent_gem
-      -#     = link_to agent_gems_path(anchor: agent.agent_gem.name) do
-      -#       %span.label.label-info
-      -#         = agent.agent_gem.name
-      .well.description
-        = markdown(scenario.description)
-      %hr
+      = render scenario, show: false

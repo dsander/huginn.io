@@ -17,4 +17,8 @@ class Scenario < ApplicationRecord
   def get_agent_data(guid)
     data['agents'].select { |a| a['guid'] == guid }.first
   end
+
+  def agents
+    @agents ||= HuginnScenario.new(data).agents
+  end
 end

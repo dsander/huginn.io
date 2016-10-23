@@ -124,7 +124,7 @@ class ScenarioImport
     BASE_FIELDS = %w(name schedule keep_events_for propagate_immediately disabled guid).freeze
 
     def agent_exists?
-      agent.present?
+      !!agent
     end
 
     def requires_merge?

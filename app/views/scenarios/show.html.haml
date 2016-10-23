@@ -1,37 +1,20 @@
-%h1
-  Show Scenario
-  = agent_name @scenario.name
-  - if @scenario.icon.blank?
-    = scenario_label(@scenario, icon('gear'))
-  - else
-    = scenario_label(@scenario, icon(@scenario.icon))
-= form_for(@scenario) do |f|
-  .row
-    .col-md-4
-      .form-group
-        = f.label :name
-        = f.text_field :name, :class => 'form-control', :placeholder => "Name your Scenario", disabled: true
-
-  .row
-    .col-md-8
-      .form-group
-        = f.label :description, "Description"
-        = f.text_area :description, :rows => 8, :class => 'form-control', :placeholder => "Optionally describe what this Scenario will do.  If this will be public, you should also include some contact information.", disabled: true
-  .row
-    .col-md-8
-      .form-group
-        = f.label :data, "Scenario JSON"
-        = f.text_area :data, :rows => 8, :class => 'form-control', :placeholder => "Scenario JSON", disabled: true
-
-  .row
-
-    .col-md-2
-      .form-group
-        = f.label :tag_bg_color, "Tag Background Color"
-        = f.color_field :tag_bg_color, :class => 'form-control', :value => @scenario.tag_bg_color || default_scenario_bg_color, disabled: true
-    .col-md-2
-      .form-group
-        = f.label :tag_fg_color, "Tag Foreground Color"
-        = f.color_field :tag_fg_color, :class => 'form-control', :value => @scenario.tag_fg_color || default_scenario_fg_color, disabled: true
-
-= link_to 'Back', scenarios_path
+.row
+  .col-lg-3
+    %p
+      = link_to 'Download Scenario JSON', download_scenario_path(@scenario), class: "btn btn-default btn-block"
+    %p
+      = link_to 'Copy Scenario URL', download_scenario_path(@scenario), class: "btn btn-default btn-block"
+    %p
+      = label_tag "Likes"
+      = rand(1000)
+    %p
+      = label_tag "Downloads"
+      = rand(1000)
+    %p
+      = label_tag "Subscriptions"
+      = rand(1000)
+    %p
+      = label_tag "Versions"
+      = "..."
+  .col-lg-9
+    = render @scenario, show: true

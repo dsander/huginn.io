@@ -21,3 +21,28 @@ hipchat_agent:
   dry_runs: false
   form_configurable: true
   oauth_service: hipchat
+
+
+commander_agent:
+  name: "CommanderAgent"
+  description: "<b>A commander</b>"
+  creates_events: true
+  receives_events: false
+  consumes_file_pointer: false
+  emits_file_pointer: false
+  controls_agents: true
+  dry_runs: false
+  form_configurable: true
+  oauth_service: null
+
+scheduler_agent:
+  name: "SchedulerAgent"
+  description: "<b>A scheduler</b>"
+  creates_events: true
+  receives_events: false
+  consumes_file_pointer: false
+  emits_file_pointer: false
+  controls_agents: true
+  dry_runs: false
+  form_configurable: true
+  oauth_service: null

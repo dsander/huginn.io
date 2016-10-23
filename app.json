@@ -4,6 +4,7 @@
   "website": "https://github.com/huginn/communin",
   "repository": "https://github.com/huginn/communin",
   "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
     "SECRET_KEY_BASE": {
       "generator": "secret"
     }
