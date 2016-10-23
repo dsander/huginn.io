@@ -41,6 +41,7 @@ RSpec.feature "ScenarioImport", type: :feature do
     it 'allows to upload a new scenario' do
       upload_scenario_json
       expect(page).to have_text('Import successful!')
+      expect(Scenario.last.url).to be_nil
     end
 
     it 'allows to create a scenario using an URL' do
@@ -54,6 +55,7 @@ RSpec.feature "ScenarioImport", type: :feature do
       expect {
         click_on 'Finish Import'
       }.to change(Scenario, :count).by(1)
+      expect(Scenario.last.url).to eq("http://example.com/scenario.json")
     end
   end
 
