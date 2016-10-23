@@ -2,7 +2,7 @@ require 'agent_gem_fetcher'
 
 # :nocov:
 # This will very likely change to a script that is automatically ran in a CI environment
-# and post the agents to the real communing instance.
+# and post the agents to the real Huginn.io instance.
 class AgentFetcher
   class <<self
     def run(gem_data = AgentGemFetcher.run)
