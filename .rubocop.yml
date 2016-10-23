@@ -10,6 +10,7 @@ AllCops:
     - 'deployment/**/*'
     - 'bin/**/*'
     - 'Guardfile'
+    - 'app/helpers/dot_helper.rb'
 
 Rails:
   Enabled: true
@@ -98,4 +99,7 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 
 Metrics/PerceivedComplexity:
+  Enabled: false
+
+Style/DoubleNegation:
   Enabled: false

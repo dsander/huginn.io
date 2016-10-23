@@ -1,6 +1,6 @@
 module DotHelper
   def render_agents_diagram(agents, layout: nil)
-    svg = IO.popen(['dot', %w(-Tsvg -q1 -o/dev/stdout /dev/stdin)], 'w+') do |dot|
+    svg = IO.popen(['dot', *%w(-Tsvg -q1 -o/dev/stdout /dev/stdin)], 'w+') do |dot|
       dot.print agents_dot(agents, rich: true, layout: layout)
       dot.close_write
       dot.read
