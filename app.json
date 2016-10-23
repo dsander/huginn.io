@@ -1,8 +1,8 @@
 {
-  "name": "Communin",
+  "name": "Huginn.io",
   "description": "A community site for Huginn",
-  "website": "https://github.com/huginn/communin",
-  "repository": "https://github.com/huginn/communin",
+  "website": "https://github.com/huginn/huginnio",
+  "repository": "https://github.com/huginn/huginnio",
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi.git",
     "SECRET_KEY_BASE": {
