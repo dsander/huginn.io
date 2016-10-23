@@ -45,8 +45,8 @@ RSpec.feature "ScenarioImport", type: :feature do
 
     it 'allows to create a scenario using an URL' do
       stub_request(:get, "http://example.com/scenario.json").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Faraday v0.9.2'}).
-        to_return(:status => 200, :body => File.open(File.join(Rails.root, 'spec/data/ifttt-roundtrip-scenario.json')).read, :headers => {})
+        with(headers: {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Faraday v0.9.2'}).
+        to_return(status: 200, body: File.open(File.join(Rails.root, 'spec/data/ifttt-roundtrip-scenario.json')).read, headers: {})
       visit new_scenario_import_path
       fill_in('Option 1: Provide a Public Scenario URL', with: 'http://example.com/scenario.json')
       click_on 'Start Import'

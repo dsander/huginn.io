@@ -12,7 +12,7 @@ class GemspecParser
       next if n.children.length < 3
       next if n.children[0] != s(:lvar, :spec)
       next if n.children[2].type != :str
-      key   = n.children[1].to_s.gsub('=', '').to_sym
+      key   = n.children[1].to_s.delete('=').to_sym
       value = n.children[2].children.first
       if data[key]
         data[key] = [data[key]] unless data[key].class == Array
@@ -24,18 +24,16 @@ class GemspecParser
     data
   end
 
-  private
+  private_class_method
 
   def self.find_node(root, *match_path)
-    return if !root.respond_to?(:children)
+    return unless root.respond_to?(:children)
     (type, match) = match_path.shift
 
     root.children.each do |child|
       next if child.type != type
       next if !match.nil? && child.children.first != match
-      if match_path.empty?
-        return child
-      end
+      return child if match_path.empty?
       return find_node(child, match_path)
     end
   end

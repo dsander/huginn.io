@@ -69,5 +69,4 @@ RSpec.describe ScenariosController, type: :controller do
       expect(response).to redirect_to(scenarios_url)
     end
   end
-
 end

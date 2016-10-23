@@ -1,0 +1,101 @@
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - '**/*.yml'
+    - 'spec/data/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'doc/**/*'
+    - 'deployment/**/*'
+    - 'bin/**/*'
+    - 'Guardfile'
+
+Rails:
+  Enabled: true
+
+Style/StringLiterals:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - 'spec/**/*'
+  Max: 180
+
+Style/DotPosition:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/NumericLiterals:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Rails/ActionFilter:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 21
+
+Metrics/ModuleLength:
+  Max: 100
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false

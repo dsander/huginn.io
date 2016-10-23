@@ -7,7 +7,7 @@ Rails.application.load_tasks
 
 begin
   require 'rspec/core/rake_task'
-  task :default => :spec
-rescue LoadError
+  task default: :spec
+rescue LoadError # rubocop:disable Lint/HandleExceptions
   # no rspec available
 end

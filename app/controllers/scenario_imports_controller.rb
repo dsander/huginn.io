@@ -1,11 +1,11 @@
 class ScenarioImportsController < ApplicationController
   def new
-    @scenario_import = ScenarioImport.new(:url => params[:url])
+    @scenario_import = ScenarioImport.new(url: params[:url])
   end
 
   def create
     @scenario_import = ScenarioImport.new(scenario_import_params)
-    @scenario_import.set_user(current_user)
+    @scenario_import.user = current_user
 
     if @scenario_import.valid? && @scenario_import.import_confirmed? && @scenario_import.import
       redirect_to @scenario_import.scenario, notice: "Import successful!"

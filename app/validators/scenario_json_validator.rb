@@ -1,12 +1,15 @@
 class ScenarioJsonValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, attribute, _value)
     data = record.send(attribute)
     return record.errors.add(:base, "Please provide either a Scenario JSON File or a Public Scenario URL.") if !data.is_a?(Hash) || data.empty?
-    return true if validate_scenario(record, data) && validate_scenario_agents_array(record, data) && validate_agents_hash(record, data) && validate_scenario_agents(record, data)
+    validate_scenario(record, data) &&
+      validate_scenario_agents_array(record, data) &&
+      validate_agents_hash(record, data) &&
+      validate_scenario_agents(record, data)
   end
 
   def validate_scenario(record, data)
-    record.errors.add(:base, "The provided data does not appear to be a valid Scenario.") if (%w[name guid agents] - data.keys).length > 0
+    record.errors.add(:base, "The provided data does not appear to be a valid Scenario.") unless (%w(name guid agents) - data.keys).empty?
     record.errors.empty?
   end
 
@@ -16,7 +19,7 @@ class ScenarioJsonValidator < ActiveModel::EachValidator
   end
 
   def validate_agents_hash(record, data)
-    record.errors.add(:base, "An agent of a scenario need to be stored as a JSON objects") unless data["agents"].any?{ |a| a.is_a?(Hash) }
+    record.errors.add(:base, "An agent of a scenario need to be stored as a JSON objects") unless data["agents"].any? { |a| a.is_a?(Hash) }
     record.errors.empty?
   end
 

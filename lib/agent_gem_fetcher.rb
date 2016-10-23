@@ -18,7 +18,7 @@ class AgentGemFetcher
     private
 
     def client
-      Octokit::Client.new(:access_token => ENV['GITHUB_API_KEY'])
+      Octokit::Client.new(access_token: ENV['GITHUB_API_KEY'])
     end
 
     def check_gemspec(file)

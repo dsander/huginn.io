@@ -1,5 +1,6 @@
 module AgentsHelper
-  FEATURE_ATTRIBUTES = [:creates_events, :receives_events, :consumes_file_pointer, :emits_file_pointer, :controls_agents, :dry_runs, :form_configurable].freeze
+  FEATURE_ATTRIBUTES = [:creates_events, :receives_events, :consumes_file_pointer,
+                        :emits_file_pointer, :controls_agents, :dry_runs, :form_configurable].freeze
 
   def agent_name(klass)
     klass.underscore.humanize.titleize

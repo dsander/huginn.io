@@ -49,6 +49,7 @@ group :development, :test do
   gem 'poltergeist', '~> 1.10.0'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'webmock', '~> 2.1.0'
+  gem 'rubocop'
 end
 
 group :development do
