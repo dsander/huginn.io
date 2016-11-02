@@ -21,6 +21,7 @@ describe OmniauthCallbacksController, type: :controller do
   context 'not logged in' do
     it 'creates the user' do
       expect { get :github }.to change(User, :count).by(1)
+      expect(User.last).to be_confirmed
     end
 
     context 'when a user with the same email already exists' do
