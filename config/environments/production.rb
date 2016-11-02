@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "communnin_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'huginnio.heroku.com' }
+  config.action_mailer.default_url_options = { host: 'huginnio.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_SERVER'],
     port: 587,

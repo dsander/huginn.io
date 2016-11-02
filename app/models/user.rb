@@ -13,6 +13,7 @@ class User < ApplicationRecord
       user.name         = auth.info.name
       user.nickname     = auth.info.nickname
       user.avatar       = auth.info.image
+      user.skip_confirmation!
     end
   end
 
