@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   resources :agent_gems, only: [:index]
   resources :documentation, only: [:index, :show]
 
+  post 'webhook/import_agents', 'Webhook#import_agents'
+
   root to: 'welcome#index'
 end
