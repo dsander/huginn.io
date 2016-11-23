@@ -12,7 +12,7 @@
       %h2
         = @scenario_import.parsed_data["name"]
         %span.text-muted
-          = "(#{pluralize(@scenario_import.parsed_data["agents"].length, "Agent")}; exported #{time_ago_in_words(Time.parse(@scenario_import.parsed_data["exported_at"]))} ago)"
+          = "(#{pluralize(@scenario_import.parsed_data["agents"].length, "Agent")}; exported #{time_ago_in_words(Time.zone.parse(@scenario_import.parsed_data["exported_at"]))} ago)"
 
     - if @scenario_import.parsed_data["description"].present?
       %blockquote= markdown(@scenario_import.parsed_data["description"])
@@ -44,7 +44,8 @@
                 changed from
                 %code
                   = field.current.to_s
-                = " to "
+                = surround ' ' do
+                  to
               %code
                 = field.updated
       - if !agent_diff.agent_exists? || agent_diff.options.requires_merge?

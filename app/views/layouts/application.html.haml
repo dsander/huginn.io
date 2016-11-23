@@ -32,15 +32,15 @@
               %li
                 = nav_link "Account", edit_user_registration_path, 'devise/registrations'
               %li
-                = link_to "Log out", destroy_user_session_path, :method => :delete, :id => "headone"
+                = link_to "Log out", destroy_user_session_path, method: :delete, id: "headone"
             - else
               %li
-                = link_to 'Log in', new_user_session_path, :class => "button", :id => "headone"
+                = link_to 'Log in', new_user_session_path, class: "button", id: "headone"
               %li
-                = link_to 'Sign up', new_user_registration_path, :class => "button", :id => "headtwo"
+                = link_to 'Sign up', new_user_registration_path, class: "button", id: "headtwo"
     .container
       - flash.keys.each do |k|
-        - klass = (k == 'notice' ? :success : :danger )
+        - klass = (k == 'notice' ? :success : :danger)
         %div{class: "flash-overlay alert alert-dismissable alert-#{klass}"}
           %button.close{type: 'button', data: {dismiss: "alert"}}
             x
