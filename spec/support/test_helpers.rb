@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module TestHelpers
   def load_json_data(path)
     JSON.parse(load_data(path))
