@@ -1,4 +1,4 @@
-# README
+# Huginn.io [![Build Status](https://travis-ci.org/dsander/huginn.io.svg?branch=master)](https://travis-ci.org/dsander/huginn.io) [![Coverage Status](https://coveralls.io/repos/github/dsander/huginn.io/badge.svg?branch=add-travis)](https://coveralls.io/github/dsander/huginn.io?branch=add-travis) [![Code Climate](https://codeclimate.com/github/dsander/huginn.io/badges/gpa.svg)](https://codeclimate.com/github/dsander/huginn.io)
 
 ## Import Agent Gems and Agents from Huginn into Huginn.io
 
