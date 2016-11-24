@@ -3,3 +3,6 @@ scss:
 
 haml:
   config_file: .haml-lint.yml
+
+ruby:
+  config_file: .rubocop.yml
