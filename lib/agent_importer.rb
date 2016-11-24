@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AgentImporter
   class <<self
     def run(data)

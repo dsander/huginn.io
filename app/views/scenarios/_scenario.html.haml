@@ -1,6 +1,6 @@
 - cache [scenario, show] do
   %h3{id: scenario.to_param}
-    = link_to scenario.name,scenario
+    = link_to scenario.name, scenario
     - if scenario.icon.blank?
       = scenario_label(scenario, icon('gear'))
     - else
@@ -28,7 +28,7 @@
         %span.text-muted
           = surround ' (', ')' do
             = link_to agent.short_type, agents_path(anchor: agent.short_type)
-      - %w{schedule keep_events_for propagate_immediately disabled}.each do |attr|
+      - %w(schedule keep_events_for propagate_immediately disabled).each do |attr|
         - unless agent.send(attr).nil?
           = label_tag attr
           = agent.send(attr.to_sym)

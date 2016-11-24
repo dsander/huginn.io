@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ScenarioJsonValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, _value)
     data = record.send(attribute)

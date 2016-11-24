@@ -1,0 +1,8 @@
+---
+engines:
+  coffeelint:
+    enabled: false
+  eslint:
+    enabled: false
+  rubocop:
+    enabled: false

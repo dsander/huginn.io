@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ScenariosController < ApplicationController
   before_action :load_scenario, only: [:show, :download]
 

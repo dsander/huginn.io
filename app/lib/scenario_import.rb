@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'ostruct'
 
 # This is a helper class for managing Scenario imports, used by the ScenarioImportsController.  This class behaves much

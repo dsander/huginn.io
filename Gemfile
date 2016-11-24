@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 ruby '2.3.1'
@@ -46,7 +47,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5.2'
   gem 'rails-controller-testing'
-  gem 'simplecov', '~> 0.12', require: false
+  gem 'coveralls', require: false
   gem 'poltergeist', '~> 1.10.0'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'webmock', '~> 2.1.0'

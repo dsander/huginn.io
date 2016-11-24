@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class HuginnAgent
   attr_reader :data
 

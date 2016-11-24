@@ -1,5 +1,11 @@
-require 'simplecov'
-SimpleCov.start('rails')
+# frozen_string_literal: true
+if ENV['CI']
+  require 'coveralls'
+  Coveralls.wear!
+else
+  require 'simplecov'
+  SimpleCov.start('rails')
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
