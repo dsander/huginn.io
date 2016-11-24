@@ -2,7 +2,7 @@ language: ruby
 services:
   - postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
   apt:
     packages:
       - graphviz
@@ -10,10 +10,16 @@ rvm:
   - 2.3.1
 cache:
   directories:
-    - .bundle
+    - ".bundle"
     - travis_phantomjs
 before_install:
   - export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH; if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs && wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 && tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
 script:
   - bundle exec rake db:create db:migrate
   - bundle exec rake
+deploy:
+  provider: heroku
+  app: huginnio
+  api_key:
+    secure: YWXOgSAOEQ9xDwDbUaiv3Qalco611IUX2KNrMHTYZuX1SXpO1pJ2L+2cLW+5jEBAsiUJoIhsnKzlupvV3NOvZg1rHUNgcivZb61VOFL3E+xsQNb5gPDOY5zMJmCeRhyKf9ZjqU3zFYPzeXiprh9fzzLAwmXrsaXWwIxEINFNNCISE83mYu93+P9G2RCXD/JDQtFggjINpb5KpTQXimZu0Fr0OtPJZCGjZ+KT5Xf/Px2o1iUm0yy4FwwHcXJpngcsDL8ePhRWV5y5JvBUCZUy4VYxuza4pOabqvJkPYFR56j0vpMG3VWmy9RAbHHLTfDvOab9YzefadCYZSOFKOLC4KJPgrhaEY0VgUUN81GhHdyHIUbagmGLcWNB5JD2XhVcDl/LYATmeavGtewGTKbcBuhzb03g1YS68D02dvQtNxvwnlPm1DF+A6AtV2OGWJPkLWpDCH9his1XwYYRrf/RzbSbcGx1XoVH00nMnwvndYBv7kewslZoflpwwfmVNvGWT5kUeFphHO40mItI1a07CtBx1kkmYazKwAsUB3LZRg+LNnzYVPn1JW45PC7uyItm4FcUmBaaPiyUrvutPb90fXBaMfwdQOqch452BU3ufhpv5C6V01McPtNSIPeiyc5sVv9NtNI+Xfhp8xHD5bPsYekwOrmHbDEvvhIN3g+hXTE=
+  run: "rake db:migrate"
