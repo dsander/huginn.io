@@ -41,6 +41,7 @@ gem 'font-awesome-sass', '~> 4.3.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'dalli', '~> 2.7.6'
+gem 'sentry-raven', '~> 2.1.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
