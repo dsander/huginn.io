@@ -14,5 +14,10 @@ RSpec.feature "Documentation", type: :feature do
       click_on('Concepts')
       expect(page).to have_text('Lorem ipsum dolor sit amet')
     end
+
+    it 'redirects to the index if the requested template does not exist' do
+      visit documentation_path('nope')
+      expect(page.current_path).to eq(documentation_index_path)
+    end
   end
 end
