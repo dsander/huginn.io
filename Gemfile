@@ -23,8 +23,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2.0'
 gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.1.2'
-gem 'octokit', '~> 4.3.0'
-gem 'parser', '~> 2.3.1.2'
 gem 'kramdown', '~> 1.5.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
