@@ -6,6 +6,11 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    - if current_user.present?
+      :css
+        [data-show-for-user="#{current_user.id}"] {
+          display: inherit !important;
+        }
   %body{'data-controller' => controller_name, 'data-action' => action_name}
     %nav.navbar.navbar-default.navbar-fixed.top{role: 'navigation'}
       .container

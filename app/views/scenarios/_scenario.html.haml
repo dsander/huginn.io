@@ -12,8 +12,7 @@
       - else
         = link_to 'Download', download_scenario_path(scenario), class: "btn btn-default"
         = link_to 'Details', scenario, class: "btn btn-default"
-      - if current_user && current_user.id == scenario.user_id
-        = link_to 'Delete', scenario_path(scenario), method: :delete, class: "btn btn-danger"
+      = link_to 'Delete', scenario_path(scenario), method: :delete, class: "btn btn-danger hidden", data: {'show-for-user': scenario.user_id, confirm: 'Are you sure?'}
   %p
     - scenario.agents.uniq(&:short_type).each do |agent|
       = link_to agents_path(anchor: agent.short_type) do
