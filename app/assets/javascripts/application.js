@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require jsondiffpatch
 //= require jsondiffpatch-formatters
+//= require clipboard
 //= require_tree .
