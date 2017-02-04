@@ -3,7 +3,8 @@
     %p
       = link_to 'Download Scenario JSON', download_scenario_path(@scenario), class: "btn btn-default btn-block"
     %p
-      = link_to 'Copy Scenario URL', download_scenario_path(@scenario), class: "btn btn-default btn-block"
+      %button.btn.btn-default.btn-block{data: {'clipboard-text': download_scenario_url(@scenario), behaviour: 'copy-to-clipboard'}}
+        Copy Scenario URL
     %p
       = label_tag "Likes"
       = rand(1000)
