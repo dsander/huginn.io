@@ -24,7 +24,7 @@ class ScenariosController < ApplicationController
   end
 
   def download
-    send_data @scenario.data.to_json, filename: "#{@scenario.name}.json"
+    send_data JSON.pretty_generate(@scenario.data), filename: "#{@scenario.name}.json"
   end
 
   def search
