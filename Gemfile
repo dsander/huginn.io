@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0.1'
+gem 'rails', '~> 5.0.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'haml', '~> 4.0.7'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'devise', '~> 4.2.0'
+gem 'devise', '~> 4.3.0'
 gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'kramdown', '~> 1.5.0'
@@ -51,7 +51,7 @@ group :development, :test do
   gem 'poltergeist', '~> 1.10.0'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'webmock', '~> 2.1.0'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.49.0'
 end
 
 group :development do
