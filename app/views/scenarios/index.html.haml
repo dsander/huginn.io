@@ -6,7 +6,7 @@
           %span.glyphicon.glyphicon-plus
           Create Scenario
     .form-group
-    = bootstrap_form_tag url: search_scenarios_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: 'hidden', enforce_utf8: false do |f|
+    = bootstrap_form_tag url: search_scenarios_url, method: :GET, layout: :horizontal, control_col: "col-sm-12", label_col: '', enforce_utf8: false do |f|
       = f.text_field :q, value: params[:q], placeholder: 'Search through Scenarios', skip_label: true
     %ul.nav.nav-pills.nav-stacked
       %li{role: 'presentation'}

@@ -50,11 +50,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.9'
   gem 'rails-controller-testing'
   gem 'coveralls', require: false
-  gem 'poltergeist', '~> 1.18'
   gem 'database_cleaner', '~> 1.7'
-  gem 'webmock', '~> 2.1.0'
+  gem 'webmock', '~> 3.7'
   gem 'rubocop', '~> 0.78.0'
   gem 'rubocop-rails', '~> 2.4'
+  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
 end
 
 group :development do
