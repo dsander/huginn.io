@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+
 class ScenariosController < ApplicationController
-  before_action :load_scenario, only: [:show, :download]
+  before_action :load_scenario, only: %i[show download]
 
   # GET /scenarios
   # GET /scenarios.json
@@ -10,8 +11,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios/1
   # GET /scenarios/1.json
-  def show
-  end
+  def show; end
 
   # DELETE /scenarios/1
   # DELETE /scenarios/1.json

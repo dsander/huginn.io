@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     return update_current_user if current_user

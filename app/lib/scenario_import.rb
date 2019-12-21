@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'ostruct'
 
 # This is a helper class for managing Scenario imports, used by the ScenarioImportsController.  This class behaves much
@@ -8,7 +9,7 @@ class ScenarioImport
   include ActiveModel::Callbacks
   include ActiveModel::Validations::Callbacks
 
-  URL_REGEX = /\Ahttps?:\/\//i
+  URL_REGEX = /\Ahttps?:\/\//i.freeze
 
   attr_accessor :file, :url, :data, :do_import, :merges, :user
 
@@ -40,7 +41,7 @@ class ScenarioImport
   def parsed_data
     @parsed_data ||= (begin
                         data && JSON.parse(data)
-                      rescue
+                      rescue StandardError
                         {}
                       end) || {}
   end
@@ -55,12 +56,12 @@ class ScenarioImport
 
   def import(_options = {})
     success = true
-    guid        = parsed_data['guid']
+    guid = parsed_data['guid']
     description = parsed_data['description']
     name        = parsed_data['name']
     @scenario = user.scenarios.where(guid: guid).first_or_initialize
-    @scenario.update_attributes!(name: name, description: description, data: parsed_data)
-    @scenario.update_attributes!(name: name, description: description, data: parsed_data, url: url.presence)
+    @scenario.update!(name: name, description: description, data: parsed_data)
+    @scenario.update!(name: name, description: description, data: parsed_data, url: url.presence)
 
     success
   end
@@ -73,11 +74,13 @@ class ScenarioImport
 
   def parse_file
     return if data.present? || file.blank?
+
     self.data = file.read.force_encoding(Encoding::UTF_8)
   end
 
   def fetch_url
     return if data.present? || url.blank? || url !~ URL_REGEX
+
     self.data = Faraday.get(url).body
   end
 
@@ -123,7 +126,7 @@ class ScenarioImport
       store! agent_data
     end
 
-    BASE_FIELDS = %w(name schedule keep_events_for propagate_immediately disabled guid).freeze
+    BASE_FIELDS = %w[name schedule keep_events_for propagate_immediately disabled guid].freeze
 
     def agent_exists?
       !!agent
@@ -145,7 +148,7 @@ class ScenarioImport
     end
 
     def diff_with!(agent)
-      return unless agent.present?
+      return if agent.blank?
 
       self.agent = agent
 
@@ -156,7 +159,8 @@ class ScenarioImport
       @requires_merge ||= options.requires_merge?
 
       BASE_FIELDS.each do |field|
-        next unless self[field].present?
+        next if self[field].blank?
+
         self[field].current = agent.send(:[], field.to_s)
 
         @requires_merge ||= self[field].requires_merge?

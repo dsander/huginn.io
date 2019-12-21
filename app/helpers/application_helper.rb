@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ApplicationHelper
   def nav_link(text, path, *controller)
     content_tag('li', class: active_nav_class(controller: controller)) do

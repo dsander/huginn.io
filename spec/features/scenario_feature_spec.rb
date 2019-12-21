@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature "ScenarioImport", type: :feature do
@@ -8,7 +9,7 @@ RSpec.feature "ScenarioImport", type: :feature do
 
   before do
     @scenario = scenarios(:bob_weather)
-    @scenario.update_attributes!(data: load_json_data('spec/data/diagram-test.json'))
+    @scenario.update!(data: load_json_data('spec/data/diagram-test.json'))
   end
 
   it 'renders the diagram for complex scenarios' do
