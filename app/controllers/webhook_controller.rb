@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'agent_importer'
 
 class WebhookController < ApplicationController

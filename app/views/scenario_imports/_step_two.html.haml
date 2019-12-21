@@ -56,10 +56,10 @@
           .col-md-12
             %pre.options{data: {index: index, requires_merge: agent_diff.options.requires_merge?}}
           :coffeescript
-            old = #{agent_diff.options.current.to_json}
+            old = #{raw agent_diff.options.current.to_json}
             unless old
               old = {}
-            updated = #{agent_diff.options.updated.to_json}
+            updated = #{raw agent_diff.options.updated.to_json}
             delta = jsondiffpatch.diff(old, updated)
             $("pre[data-index=#{index}]").html(jsondiffpatch.formatters.html.format(delta, old))
 .row

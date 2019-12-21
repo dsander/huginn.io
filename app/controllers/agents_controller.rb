@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AgentsController < ApplicationController
   def index
     @agents = Agent.order(name: :ASC).all

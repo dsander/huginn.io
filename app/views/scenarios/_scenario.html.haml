@@ -34,6 +34,6 @@
           %br
       %pre.options{data: {index: agent.guid, requires_merge: false}}
       :coffeescript
-        updated = #{agent.options.to_json}
+        updated = #{raw agent.options.to_json}
         delta = jsondiffpatch.diff({}, updated)
         $("pre[data-index=#{agent.guid}]").html(jsondiffpatch.formatters.html.format(delta, {}))

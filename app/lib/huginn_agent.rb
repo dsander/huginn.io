@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class HuginnAgent
   attr_reader :data
 
@@ -6,7 +7,7 @@ class HuginnAgent
     @data = data
   end
 
-  %w(name guid schedule propagate_immediately keep_events_for disabled options type).each do |attr|
+  %w[name guid schedule propagate_immediately keep_events_for disabled options type].each do |attr|
     define_method(attr.to_sym) do
       data[attr]
     end

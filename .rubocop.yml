@@ -1,7 +1,9 @@
+require: rubocop-rails
+
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.6
   Exclude:
     - '**/*.yml'
     - 'spec/data/**/*'
@@ -25,15 +27,15 @@ Documentation:
 Style/RegexpLiteral:
   Enabled: false
 
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - 'spec/**/*'
   Max: 180
 
-Style/DotPosition:
+Layout/DotPosition:
   Enabled: false
 
 Style/FormatString:
@@ -45,7 +47,7 @@ Metrics/ClassLength:
 Lint/AssignmentInCondition:
   Enabled: false
 
-Style/EmptyLinesAroundAccessModifier:
+Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
 
 Style/SingleLineBlockParams:
@@ -62,23 +64,13 @@ Style/BlockDelimiters:
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
-Rails/ActionFilter:
+Layout/MultilineOperationIndentation:
   Enabled: false
-
-Style/MultilineOperationIndentation:
-  Enabled: false
-  Enabled: false
-
-Metrics/AbcSize:
-  Max: 21
-
-Metrics/ModuleLength:
-  Max: 100
 
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Style/MultilineMethodCallIndentation:
+Layout/MultilineMethodCallIndentation:
   Enabled: false
 
 Style/NestedParenthesizedCalls:
@@ -103,4 +95,10 @@ Metrics/PerceivedComplexity:
   Enabled: false
 
 Style/DoubleNegation:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false

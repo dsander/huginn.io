@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 if ENV['CI']
   require 'coveralls'
   Coveralls.wear!
@@ -9,20 +10,35 @@ end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
-Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, inspector: true)
-end
 Capybara.default_max_wait_time = 10
-Capybara.javascript_driver = :poltergeist_debug
+
+Capybara.server = :puma, { Silent: true }
+
+require "selenium/webdriver"
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  options.headless!
+  options.add_argument "--window-size=1680,1050"
+
+  Capybara::Selenium::Driver.new app,
+    browser: :chrome,
+    options: options
+end
+
+Capybara.javascript_driver = :headless_chrome
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -65,6 +81,8 @@ RSpec.configure do |config|
   # get run.
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
+
+  config.example_status_persistence_file_path = "tmp/rspec_examples.txt"
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

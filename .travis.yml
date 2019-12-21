@@ -6,14 +6,12 @@ addons:
   apt:
     packages:
       - graphviz
+  chrome: stable
 rvm:
-  - 2.3.1
+  - 2.6.5
 cache:
   directories:
     - "vendor/bundle/"
-    - travis_phantomjs
-before_install:
-  - export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH; if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs && wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 && tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
 script:
   - bundle exec rake db:create db:migrate
   - bundle exec rake

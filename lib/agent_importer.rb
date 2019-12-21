@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AgentImporter
   class <<self
     def run(data)
@@ -17,8 +18,9 @@ class AgentImporter
 
     def update_agent_gem(agent_gem)
       return unless agent_gem['repository']
+
       AgentGem.find_or_initialize_by(repository: agent_gem['repository']).tap do |gem|
-        gem.update_attributes!(agent_gem.except('agents'))
+        gem.update!(agent_gem.except('agents'))
       end
     end
   end
