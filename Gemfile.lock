@@ -153,7 +153,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.3.0)
     jwt (2.2.1)
-    kramdown (2.1.0)
+    kramdown (2.3.0)
+      rexml
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -251,6 +252,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.4)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -376,7 +378,7 @@ DEPENDENCIES
   haml (~> 5)
   jbuilder (~> 2.5)
   jquery-rails
-  kramdown (~> 2.1)
+  kramdown (~> 2.3)
   letter_opener (~> 1.4.1)
   listen (~> 3.2)
   omniauth-github (~> 1.2)
