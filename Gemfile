@@ -25,7 +25,7 @@ gem 'devise', '~> 4.7'
 gem 'bootstrap_form', '~> 2.5.0'
 gem 'omniauth-github', '~> 1.2'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
-gem 'kramdown', '~> 2.1'
+gem 'kramdown', '~> 2.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
