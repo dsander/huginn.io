@@ -2,6 +2,6 @@
 
 class WelcomeController < ApplicationController
   def index
-    render text: '', layout: true
+    render
   end
 end

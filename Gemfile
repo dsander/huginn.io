@@ -2,10 +2,10 @@
 
 source 'https://rubygems.org'
 
-ruby '2.6.5'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.6'
+gem 'rails', '~> 5.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1'
 # Use Puma as the app server
@@ -21,10 +21,10 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'haml', '~> 5'
 gem 'bootstrap-sass', '~> 3.4'
-gem 'devise', '~> 4.7'
+gem 'devise', github: 'heartcombo/devise', ref: '0cd72a56f984a7ff089246f87a8b259120545edd'
 gem 'bootstrap_form', '~> 2.5.0'
-gem 'omniauth-github', '~> 1.2'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-github', '~> 2'
+gem 'omniauth-rails_csrf_protection'
 gem 'kramdown', '~> 2.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -44,18 +44,21 @@ gem 'rails-assets-clipboard', source: 'https://rails-assets.org'
 gem 'dalli', '~> 2.7.6'
 gem 'sentry-raven', '~> 2.13'
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.7'
-  gem 'webmock', '~> 3.7'
+  gem 'webmock'
   gem 'rubocop', '~> 0.78.0'
   gem 'rubocop-rails', '~> 2.4'
   gem 'capybara-selenium'
-  gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 4.0'
 end
 
 group :development do
