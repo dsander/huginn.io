@@ -41,7 +41,7 @@ gem 'rails-assets-clipboard', source: 'https://rails-assets.org'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'dalli', '~> 2.7.6'
+gem 'dalli', '~> 3.2.3'
 gem 'sentry-raven', '~> 2.13'
 
 # Reduces boot times through caching; required in config/boot.rb
